@@ -582,19 +582,19 @@ async def moderations(ctx):
 
 @bot.command(aliases=['ud'])
 async def urban(*msg):
-		word = ' '.join(msg)
-		api = "http://api.urbandictionary.com/v0/define"
-		response = requests.get(api, params=[("term", word)]).json()
-		embed = discord.Embed(description="No results found!", colour=0xFF0000)
-		if len(response["list"]) == 0:
-			return await bot.say(embed=embed)
-		embed = discord.Embed(title="Word", description=word, colour=embed.colour)
-		embed.add_field(name="Top definition:", value=response['list'][0]['definition'])
-		embed.add_field(name="Examples:", value=response['list'][0]["example"])
-		await bot.say(embed=embed)
-		channel = bot.get_channel('525109045221261312')
-		embed = discord.Embed(title=f"User: {ctx.message.author.name} have used urban command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
-		await bot.send_message(channel, embed=embed)
+	word = ' '.join(msg)
+	api = "http://api.urbandictionary.com/v0/define"
+	response = requests.get(api, params=[("term", word)]).json()
+	embed = discord.Embed(description="No results found!", colour=0xFF0000)
+	if len(response["list"]) == 0:
+		return await bot.say(embed=embed)
+	embed = discord.Embed(title="Word", description=word, colour=embed.colour)
+	embed.add_field(name="Top definition:", value=response['list'][0]['definition'])
+	embed.add_field(name="Examples:", value=response['list'][0]["example"])
+	await bot.say(embed=embed)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used urban command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
 async def maths(ctx):
@@ -660,8 +660,10 @@ async def status_error(error, ctx):
 	
 @bot.command(pass_context=True)
 async def botinfo(ctx):
-	embed=discord.Embed(title="I am created by noobperson#2436", description="I was created at April 2, 2018", color=0xFFFF00)
-	embed.add_field(name="Thank you letter", value="Thank you for reading and learning more about me :)")
+	embed=discord.Embed(title="Bot name", description="Tanki Online", color=0xFFFF00)
+	embed.add_field(name="Creator", value="noobperson#2436")
+	embed.add_field(name="Invite link", value="[Click Here!](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=2146958839&scope=bot)
+	embed.add_field(name="Prefix", value="d!")
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
 	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used botinfo command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
