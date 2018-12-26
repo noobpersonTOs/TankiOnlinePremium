@@ -543,7 +543,8 @@ async def promote_error(error, ctx):
 async def help(ctx):
 	server = ctx.message.server
 	author = ctx.message.author
-	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!membercount", color=0xFFFF)
+	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!botinfo", color=0xFFFF)
+	embed.add_field(name="bot info", value="d!botinfo")
 	embed.add_field(name="ping", value="d!ping - get bot's ping time")
 	embed.add_field(name="eval", value="d!eval [Code] - Only noobperson can do this")
 	embed.add_field(name="clean", value="d!clean [messages] - clean the chat")
