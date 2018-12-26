@@ -173,21 +173,6 @@ async def rating(ctx, user: str):
     embed.add_field(name = "Deaths", value ='{}\n'.format(DeathsCount))
     await bot.say(embed=embed)
     print(f"{ctx.message.author.name} {ctx.message.author.id} from {ctx.message.server} used d!ratings command")
-    
-@bot.command(pass_context=True)
-async def ratings(ctx, user: str):
-    url = "https://ratings.tankionline.com/api/eu/profile/?user={}".format(user)
-    async with aiohttp.get(url) as r:
-    	data = await r.json()
-    	try:
-		embed = discord.Embed(title = data["name"], description=" ", color=0xFFFF)
-    		embed.add_field(name = "Rank", value = data["Rank"])
-    		embed.add_field(name = "XP", value = data["Experience"])
-    		embed.add_field(name = "K/D", value = data["Kills/Deaths Ratio"])
-    		embed.add_field(name = "Active Premium", value = "Yes" if data ["HasPremium"] else "No")
-    		await bot.say(embed=embed)
-    	except:
-    		await bot.say('User not found')
     			
 @bot.command(pass_context=True)
 async def report(ctx, *, reportmsg: str):
