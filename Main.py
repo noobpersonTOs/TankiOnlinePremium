@@ -1,0 +1,837 @@
+import discord
+from discord.ext import commands
+import inspect
+import time
+from discord.utils import get
+import random
+import youtube_dl
+import requests
+import random
+import json
+import asyncio
+from itertools import cycle
+import traceback
+import aiohttp
+import datetime
+import os
+
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("d!"))
+bot.remove_command('help')
+now = datetime.datetime.now()
+    
+@bot.event
+async def on_command_error(error, ctx):
+	channel = ctx.message.channel
+	if isinstance(error, commands.MissingRequiredArgument):
+		await bot.send_message(channel, "It seems you are missing required argument(s). Try again if you have all the arguements needed.")
+
+@bot.event
+async def on_ready():
+	print('Logged in as')
+	print("User name:", bot.user.name)
+	print("User id:", bot.user.id)
+	print('---------------')
+
+@bot.event
+async def on_message(message):
+	if message.content.startswith("d!c open"):
+		randomcontainer = ["You found a uncommon item: Repair kit", "You found a common item: 125 Double Armor", "You found a common item: 125 Double Damage", "You found a common item: 125 speed boost", "You found a common item: 125 mines", "You found a exotic item: Firebird XT", "You found a exotic item: Freeze XT", "You found a exotic item: Ricochet XT", "You found a exotic item: Vulcan XT", "You found a exotic item: Thunder XT", "You found a exotic item: Railgun XT", "You found a exotic item: Smoky XT", "You found a exotic item: Wasp XT", "You found a exotic item: Hornet XT", "You found a exotic item: Viking XT", "You found a exotic item: Titan XT", "You found a exotic item: Mammoth XT", "You found a rare item: Lava paint", "You found a rare item: Lead paint", "You found a rare item: Invader paint", "You found a rare item: Safari paint", "You found a rare item: Dragon paint", "You found a rare item: Magma paint", "You found a rare item: Mary paint", "You found a rare item: Sahara paint", "You found a rare item: Night paint", "You found a rare item: Storm paint", "You found a rare item: In Love paint", "You found a rare item: Carbon paint", "You found a rare item: Confetti paint", "You found a rare item: Alien paint", "You found a rare item: Chainmail", "You found a rare item: Dirty paint", "You found a rare item: Jaguar paint", "You found a rare item: Desert", "You found a rare item: Guerrila paint", "You found a rare item: Swash paint", "You found a rare item: Harlequin paint", "You found a rare item: Pixel paint", "You found a rare item: Corrosion paint", "You found a epic item: Frost paint", "You found a epic item: Golden Star paint", "You found a epic item: Archnid paint", "You found a epic item: Liquid Metal paint", "You found a epic item: Drought paint", "You found a epic item: Strawberry paint", "You found a epic item: Barber Shop paint", "You found a epic item: Scandinavia paint", "You found a epic item: Lunar Soil paint", "You found a epic item: Rust paint", "You found a epic item: Steak paint", "You found a epic item: Amber paint", "You found a epic item: Lime paint", "You found a epic item: Neuron paint", "You found a epic item: Domino paint", "You found a epic item: Mint paint", "You found a epic item: Watercolor paint"]
+		await bot.send_message(message.channel, (random.choice(randomcontainer)))
+	
+	if message.content.upper().startswith("NOOB DYNO"):
+		msg = ("Don't insult my friend Dyno! :angry:                                                                                                                         you are noob {0.author.mention}!").format(message)
+		await bot.send_message(message.channel, msg)
+	
+	if message.content.upper().startswith('D!8BALL'):
+		ball8 = (['It is certain','As i see it, yes', 'Dont count on it', 'Without a doubt', 'Definitely', 'Very doubtful', 'Outlook not so good', 'My sources say no', 'My reply is no', 'Most likely', 'You may rely on it', 'Ask again later'])
+		await bot.send_message(message.channel,(random.choice(ball8)))
+
+	if message.content.upper().startswith('HELLO BOT'):
+		msg = "hello {0.author.mention}".format(message)
+		await bot.send_message(message.channel, msg)
+	
+	if message.content.startswith('d!hello'):
+		msg = "hello {0.author.mention}".format(message)
+		await bot.send_message(message.channel, msg)
+	await bot.process_commands(message)
+	
+@bot.command(pass_context=True, aliases=['xmas', 'chrimbo'])
+async def christmas(ctx):
+	"""Christmas countdown!"""
+	await bot.say("**" + str(diff.days) + "**" + " day(s) left until Christmas day! :christmas_tree:")
+	
+@bot.command()
+async def square(number):
+    squared_value = int(number) * int(number)
+    await bot.say(str(number) + " squared is " + str(squared_value))
+	
+@bot.command(pass_context=True, no_pm=True)
+async def infos(ctx):
+	"""Show server info."""
+	members = set(ctx.message.server.members)
+	offline = filter(lambda m: m.status is discord.Status.offline, members)
+	offline = set(offline)
+	bots = filter(lambda m: m.bot, members)
+	bots = set(bots)
+	users = members - bots
+	servericon = ctx.message.server.icon_url
+	channel_passed = (ctx.message.timestamp - ctx.message.channel.created_at).days 
+	server_passed = (ctx.message.timestamp - ctx.message.server.created_at).days
+	channel_created_at = ("Created on {} ({} days ago!)".format(ctx.message.channel.created_at.strftime("%d %b %Y %H:%M"), channel_passed))
+	server_created_at = ("Created on {} ({} days ago!)".format(ctx.message.server.created_at.strftime("%d %b %Y %H:%M"), server_passed))
+	try:
+		em = discord.Embed(description="{}, here you go:".format(ctx.message.author.mention), color=0X008CFF, title="Server Info")
+		em.set_thumbnail(url=servericon)
+		em.add_field(name="Server Name", value=str(ctx.message.server.name))
+		em.add_field(name="Server ID", value=str(ctx.message.server.id))
+		em.add_field(name="Server Region", value=str(ctx.message.server.region))
+		em.add_field(name="Server Verification", value=str(ctx.message.server.verification_level))
+		em.add_field(name="Server Created At", value=str(server_created_at))
+		em.add_field(name="Server Roles", value=str(len(ctx.message.server.roles) - 1))
+		em.add_field(name="Server Owner", value=str(ctx.message.server.owner.name))
+		em.add_field(name="Owner ID", value=str(ctx.message.server.owner.id))
+		em.add_field(name="Owner Nick", value=str(ctx.message.server.owner.nick))
+		em.add_field(name="Owner Status", value=str(ctx.message.server.owner.status))
+		em.add_field(name="Total Bots", value=str(len(bots)))
+		em.add_field(name="Bots Online", value=str(len(bots - offline)))
+		em.add_field(name="Bots Offline", value=str(len(bots & offline)))
+		em.add_field(name="Total Users", value=str(len(users)))
+		em.add_field(name="Online Users", value=str(len(users - offline)))
+		em.add_field(name="Offline Users", value=str(len(users & offline)))
+		em2 = discord.Embed(color=0X008CFF)
+		em2.add_field(name="Channel Name", value=str(ctx.message.channel.name))
+		em2.add_field(name="Channel ID", value=str(ctx.message.channel.id))
+		em2.add_field(name="Channel Default", value=str(ctx.message.channel.is_default))
+		em2.add_field(name="Channel Position", value=str(ctx.message.channel.position + 1))
+		em2.add_field(name="Channel Created At", value=str(channel_created_at))
+		await bot.say(embed=em)
+		await bot.say(embed=em2)
+	except discord.HTTPException:
+		await bot.say("An unknown error occured while sending the embedded message.")
+			
+@bot.command(pass_context=True)
+async def autobaselink(ctx):
+	try:
+		x = int(ctx.message.content[15:])
+		await bot.say("**Your bot's invite link is:** <https://discordapp.com/oauth2/authorize?&client_id=" + str(x) + "&scope=bot&permissions=8>")
+	except:
+		text = await bot.say("**Invalid client id, recheck the id and make sure that you didn't accidentally use your bot token or client secret <@" + str(ctx.message.author.id) + ">**")
+		await bot.delete_message(ctx.message)
+		await asyncio.sleep(5)
+		await bot.delete_message(text)
+
+@bot.command(pass_context=True)
+async def reverse(self, ctx, *, msg: str):
+	"""ffuts esreveR"""
+	await bot.say(msg[::-1])
+	
+@bot.command(pass_context=True)
+async def staffrequest(ctx, *, msg):
+	owner = ctx.message.server.owner
+	author = ctx.message.author
+	await bot.send_message(owner, msg)
+	await bot.send_message(owner, " Requested by " + author.name)
+	await bot.delete_message(ctx.message)
+	
+@bot.command()
+async def stats():
+	servers = list(bot.servers)
+	embed = discord.Embed(title="Servers:", description=f"{str(len(servers))}", color=0xFFFF)
+	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
+async def serverinfo(ctx):
+    '''Displays Info About The Server!'''
+
+    server = ctx.message.server
+    roles = [x.name for x in server.role_hierarchy]
+    role_length = len(roles)
+
+    if role_length > 50: #Just in case there are too many roles...
+        roles = roles[:50]
+        roles.append('>>>> Displaying[50/%s] Roles'%len(roles))
+
+    roles = ', '.join(roles);
+    channelz = len(server.channels);
+    time = str(server.created_at); time = time.split(' '); time= time[0];
+    join = discord.Embed(description= '%s '%(str(server)),title = 'Server Name', color=0x00D5FF)
+    join.set_thumbnail(url = server.icon_url);
+    join.add_field(name = 'Owner', value = str(server.owner) + '\n' + server.owner.id);
+    join.add_field(name = 'ID', value = str(server.id))
+    join.add_field(name = 'Member Count', value = str(server.member_count));
+    join.add_field(name = 'Text/Voice Channels', value = str(channelz));
+    join.add_field(name="Server Roles", value = str(len(ctx.message.server.roles) - 1));
+    join.set_footer(text ='Created: %s'%time);
+
+    return await bot.say(embed = join);
+	
+@bot.command(pass_context=True)
+async def rating(ctx, user: str):
+    url = "https://ratings.tankionline.com/api/eu/profile/?user={}".format(user)
+    response = requests.get(url)
+    value = response.json() ["user"]["Rank"]["Experience"]["Crystals"]["Golds"]["Premium"]["Kills"]["Deaths"]
+    embed = discord.Embed(title = "User", description ='{}\n'.format(Nickname), color=0xFFFFF)
+    embed.add_field(name = "Rank", value ='{}\n'.format(Rank))
+    embed.add_field(name = "Experience", value ='{}\n'.format(Experience))
+    embed.add_field(name = "Crystals", value ='{}\n'.format(EarnedCrystals))
+    embed.add_field(name = "Golds", value ='{}\n'.format(CaughtGolds))
+    embed.add_field(name = "Premium", value ='{}\n'.format(HasPremium))
+    embed.add_field(name = "Kills", value ='{}\n'.format(KillsCount))
+    embed.add_field(name = "Deaths", value ='{}\n'.format(DeathsCount))
+    await bot.say(embed=embed)
+    print(f"{ctx.message.author.name} {ctx.message.author.id} from {ctx.message.server} used d!ratings command")
+    
+@bot.command(pass_context=True)
+async def ratings(ctx, user: str):
+    url = "https://ratings.tankionline.com/api/eu/profile/?user={}".format(user)
+    async with aiohttp.get(url) as r:
+    	data = await r.json()
+    	try:
+    		embed = discord.Embed(title = data["name"], description=" ", color=0xFFFF)
+    		embed.add_field(name = "Rank", value = data["Rank"])
+    		embed.add_field(name = "XP", value = data["Experience"])
+    		embed.add_field(name = "K/D", value = data["Kills/Deaths Ratio"])
+    		embed.add_field(name = "Active Premium", value = "Yes" if data ["HasPremium"] else "No")
+    		await bot.say(embed=embed)
+    	except:
+    		await bot.say('User not found')
+    			
+@bot.command(pass_context=True)
+async def report(ctx, *, reportmsg: str):
+    channel = bot.get_channel('503634621699850250')
+    embed = discord.Embed(title=f"User: {ctx.message.author.name}", description=f"Report: {reportmsg}", color=0xff9393)        
+    await bot.send_message(channel, embed=embed)
+    embed = discord.Embed(title="Your report has been submitted and we will get back to you as soon as possible", description=f"Case details: {reportmsg} ", color=0xff9393)       
+    await bot.say(embed=embed)
+    
+@bot.command(pass_context=True)
+async def suggest(ctx, *, reportmsg: str):
+    channel = bot.get_channel('503634621699850250')
+    msg = embed = discord.Embed(title=f"User: {ctx.message.author.name}", description=f"Suggestion: {reportmsg}", color=0xff9393)
+    await bot.send_message(channel, embed=embed)
+    embed = discord.Embed(title="Your suggestion has been submitted and we will get back to you as soon as possible", description=f"Suggestion details: {reportmsg} ", color=0xff9393)
+    await bot.say(embed=embed)
+
+@bot.command(pass_context=True)
+async def ping(ctx):
+    """Pings the bot and gets a response time."""
+    pingtime = time.time()
+    pingms = await bot.say("Pinging...")
+    ping = (time.time() - pingtime) * 1000
+    await bot.edit_message(pingms, "Pong! :ping_pong: ping time is `%dms`" % ping)
+	
+@bot.command(name="setnick", pass_context=True)
+@commands.has_permissions(manage_nicknames=True)     
+async def _setnick(ctx, user: discord.Member, *, nickname):
+    await bot.change_nickname(user, nickname)
+    await bot.delete_message(ctx.message)
+    
+@_setnick.error
+async def setnick_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, you do not have a manage nickname permission.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+		
+@bot.command(name="rep", pass_context=True)
+@commands.cooldown(1, 86400, commands.BucketType.user)
+async def _rep(ctx, user: discord.Member = None):
+	author = ctx.message.author
+	await bot.say(f"*** :up: | {author.name} has given {user.mention} a reputation point!***".format(author.mention))
+	
+@_rep.error
+async def rep_error(error, ctx):
+    if isinstance(error, commands.CommandOnCooldown):
+    	msg = ':exclamation: This command is on cooldown, please try again in {:.2f}s :exclamation:'.format(error.retry_after)
+    await bot.send_message(ctx.message.channel, msg)
+    
+@bot.command(pass_context = True)
+@commands.has_permissions(administrator=True)
+async def setup(ctx):
+    author = ctx.message.author
+    server = ctx.message.server
+    mod_perms = discord.Permissions(manage_messages=True, kick_members=True, manage_nicknames =True, mute_members=True)
+    admin_perms = discord.Permissions(ADMINISTRATOR=True)
+    
+    await bot.create_role(author.server, name="Owner", permissions=admin_perms)
+    await bot.create_role(author.server, name="Admin", permissions=admin_perms)
+    await bot.create_role(author.server, name="Senior Moderator", permissions=mod_perms)
+    await bot.create_role(author.server, name="G.O.H")
+    await bot.create_role(author.server, name="Moderator", permissions=mod_perms)
+    await bot.create_role(author.server, name="Muted")
+    
+    await bot.create_role(author.server, name="Friend of Owner")
+    await bot.create_role(author.server, name="Verified")
+    everyone_perms = discord.PermissionOverwrite(send_messages=False, read_messages=True)
+    everyone = discord.ChannelPermissions(target=server.default_role, overwrite=everyone_perms)
+    user_perms = discord.PermissionOverwrite(read_messages=True)
+    user = discord.ChannelPermissions(target=server.default_role, overwrite=user_perms)
+    private_perms = discord.PermissionOverwrite(read_messages=False)
+    private = discord.ChannelPermissions(target=server.default_role, overwrite=private_perms)    
+    await bot.create_channel(server, '🎉welcome🎉',everyone)
+    await bot.create_channel(server, '🎯rules🎯',everyone)
+    await bot.create_channel(server, '🎥featured-content🎥',everyone)
+    await bot.create_channel(server, '📢announcements📢',everyone)
+    await bot.create_channel(server, '📢vote_polls📢',everyone)
+    await bot.create_channel(server, 'private_chat',private)
+    await bot.create_channel(server, '🎮general_chat🎮',user)
+    await bot.create_channel(server, '🎮general_media🎮',user)
+    await bot.create_channel(server, '👍bots_zone👍',user)
+    await bot.create_channel(server, '🎥youtube_links🎥',user)
+    await bot.create_channel(server, '🎥giveaway_links🎥',user)
+    await bot.create_channel(server, '🎥other_links🎥',user)
+    await bot.create_channel(server, '🔥Music Zone🔥', type=discord.ChannelType.voice)
+    await bot.create_channel(server, '🔥music_command🔥s',user)
+    await bot.create_channel(server, '🔥Chill Zone🔥', type=discord.ChannelType.voice)
+    print(f"{ctx.message.author.name} from {ctx.message.server} used d!setup command")
+    
+def user_is_me(ctx):
+	return ctx.message.author.id == "277983178914922497"
+    
+@bot.command(name="multicolor", pass_context=True)
+@commands.check(user_is_me)
+async def _multicolor(ctx, role: discord.Role, speed: int):
+	embed = discord.Embed(description=f":rainbow: \n Speed - **{speed}** \n Role - **{role}**")
+	await bot.say(embed=embed)
+	while True:
+		rainrolecolor = random.randint(0, 0xffffff)
+		await bot.edit_role(ctx.message.server, role, color=discord.Colour(rainrolecolor))
+		await asyncio.sleep(speed)
+		
+@_multicolor.error
+async def multicolor_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, this command is in development so you can't use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+		
+@bot.command(pass_context=True)
+async def coinflip(ctx):
+    user = ctx.message.author
+    side = random.randint(0, 1)
+    server = ctx.message.server
+    join = discord.Embed(title="Tanki Online ", description=" ", color=0x008790)
+    if side == 0:
+        join.add_field(name="the coin landed on:", value="Heads!", inline=False)
+        join.set_footer(text='Requested by: ' + user.name)
+        await bot.send_message(ctx.message.channel, embed=join)
+    if side == 1:
+        join.add_field(name="the coin landed on:", value="Tails!", inline=False)
+        join.set_footer(text='Requested by: ' + user.name)
+        await bot.send_message(ctx.message.channel, embed=join)
+        channel = bot.get_channel('525109045221261312')
+        embed = discord.Embed(title=f"User: {ctx.message.author.name} have used coinflip command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+        await bot.send_message(channel, embed=embed)
+		
+@bot.command(name='eval', pass_context=True)
+@commands.check(user_is_me)
+async def _eval(ctx, *, command):
+    res = eval(command)
+    if inspect.isawaitable(res):
+        await bot.say(await res)
+    else:
+    	await bot.delete_message(ctx.message)
+    	await bot.say(res)
+        
+@_eval.error
+async def eval_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You can't use this command only the bot owner can do this.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+	
+@bot.command()
+@commands.check(user_is_me)
+async def servers():
+  servers = list(bot.servers)
+  await bot.say("Connected on " + str(len(bot.servers)) + " servers:")
+  await bot.say('\n'.join(server.name for server in servers))
+  await bot.say('\n'.join(server.id for server in servers))
+
+@bot.command(pass_context=True)
+@commands.check(user_is_me)
+async def addrank(ctx, *, name = None):
+	author = ctx.message.author
+	server = ctx.message.server
+	role = discord.utils.get(ctx.message.server.roles, name=name)
+	await bot.create_role(server, name=name)
+	text = await bot.say("a role has been created by {}".format(author.mention))
+	
+@bot.command(pass_context=True)
+@commands.check(user_is_me)
+async def delrank(ctx, *, role_name):
+  role = discord.utils.get(ctx.message.server.roles, name=role_name)
+  if role:
+    try:
+      await bot.delete_role(ctx.message.server, role)
+      await bot.say("The role {} has been deleted!".format(role.name))
+    except discord.Forbidden:
+      await bot.say("Missing Permissions to delete this role!")
+  else:
+    await bot.say("The role doesn't exist!")
+	
+@bot.command(pass_context=True)
+async def bug(ctx, *, reportmsg: str):
+    channel = bot.get_channel('503634621699850250')
+    msg = embed = discord.Embed(title=f"User: {ctx.message.author.name} {ctx.message.author.id}", description=f"Bug reports: {reportmsg}", color=0xFFFF)
+    await bot.send_message(channel, embed=embed)
+    text = embed = discord.Embed(title="Your bug reports has been submitted", description=f"{ctx.message.author.name}'s message: {reportmsg} ", color=0xFFFF)
+    await bot.delete_message(ctx.message)
+    await bot.say(embed=embed)
+    channel = bot.get_channel('525109045221261312')
+    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used bug command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    await bot.send_message(channel, embed=embed)
+    
+@bot.command(pass_context=True)
+async def idea(ctx, *, reportmsg: str):
+    channel = bot.get_channel('503634621699850250')
+    msg = embed = discord.Embed(title=f"User: {ctx.message.author.name} {ctx.message.author.id}", description=f"Idea: {reportmsg}", color=0xFFFF)
+    await bot.send_message(channel, embed=embed)
+    embed = discord.Embed(title="Your idea has been submitted", description=f"{ctx.message.author.name}'s message: {reportmsg} ", color=0xFFFF)
+    await bot.delete_message(ctx.message)
+    await bot.say(embed=embed)
+    channel = bot.get_channel('525109045221261312')
+    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used idea command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    await bot.send_message(channel, embed=embed)
+		
+@bot.command(pass_context=True, no_pm=True)
+async def userinfo(ctx, user: discord.Member = None):
+	if user is None:
+		user = ctx.message.author
+	embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0x00ff00)
+	embed.add_field(name="Name:", value=user.name, inline=True)
+	embed.add_field(name="ID:", value=user.id, inline=True)
+	embed.add_field(name="Status:", value=user.status, inline=True)
+	embed.add_field(name='Playing Status:', value=user.game, inline=True)
+	embed.add_field(name="Highest Role:", value=user.top_role, inline=True)
+	embed.add_field(name="Account Created:", value=user.created_at.strftime("%A, %B %d %Y %H:%M:%S %p"))
+	embed.add_field(name="Joined At:", value=user.joined_at.strftime("%A, %B %d %Y %H:%M:%S %p"))
+	embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
+	embed.set_footer(text=" | {}".format(user.name), icon_url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
+	await bot.say(embed=embed)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used userinfo command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True)
+async def info(ctx):
+	author = ctx.message.author
+	servers = list(bot.servers)
+	embed = discord.Embed(title="Tanki Online", color=0xFFFF)
+	embed.add_field(name="Servers:", value=f"{str(len(servers))}")
+	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
+	embed.add_field(name="Invite", value=f"[Link](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=2146958839&scope=bot)")
+	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/bweznkF)")
+	embed.add_field(name="Donate", value=f"[Link](https://www.paypal.me/noobpersonTO2)")
+	embed.add_field(name="vote my bot", value=f"[Link](https://discordbots.org/bot/409253229491126285/vote)")
+	embed.set_footer(text=" | {}".format(bot.user.name), icon_url=bot.user.avatar_url)
+	await bot.say(embed=embed)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used info command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+		
+@bot.command(pass_context=True)
+@commands.has_permissions(kick_members=True, administrator=True)
+async def mute(ctx, user: discord.Member, *, arg):
+	if arg is None:
+		await bot.say("please say a reason to {}".format(user.name))
+		return False
+	reason = arg
+	author = ctx.message.author
+	role = discord.utils.get(ctx.message.server.roles, name="Muted")
+	await bot.add_roles(user, role)
+	embed = discord.Embed(title="Mute", description=" ", color=0xFFA500)
+	embed.add_field(name="User: ", value="<@{}>".format(user.id), inline=False)
+	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
+	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
+@commands.has_permissions(kick_members=True, administrator=True)
+async def unmute(ctx, user: discord.Member, *, arg):
+	if arg is None:
+		await bot.say("please say a reason to {}".format(user.name))
+		return False
+	reason = arg
+	author = ctx.message.author
+	role = discord.utils.get(ctx.message.server.roles, name="Muted")
+	await bot.remove_roles(user, role)
+	embed = discord.Embed(title="Unmute", description=" ", color=0x00ff00)
+	embed.add_field(name="User: ", value="<@{}>".format(user.id), inline=False)
+	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
+	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
+	await bot.say(embed=embed)
+
+@bot.command(pass_context=True)
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, user: discord.Member, *, arg):
+	if arg is None:
+		await bot.say("please say a reason to {}".format(user.name))
+		return False
+	reason = arg
+	author = ctx.message.author
+	await bot.kick(user)
+	embed = discord.Embed(title="Kick", description=" ", color=0x00ff00)
+	embed.add_field(name="User: ", value="<@{}>".format(user.id), inline=False)
+	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
+	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
+	await bot.say(embed=embed)
+  
+@bot.command(pass_context=True)
+@commands.has_permissions(ban_members=True)
+async def ban(ctx, user: discord.Member, *, arg):
+	if arg is None:
+		await bot.say("please say a reason to {}".format(user.name))
+		return False
+	reason = arg
+	author = ctx.message.author
+	await bot.ban(user)
+	embed = discord.Embed(title="Ban", description=" ", color=0xFF0000)
+	embed.add_field(name="User: ", value="<@{}>".format(user.id), inline=False)
+	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
+	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
+	await bot.say(embed=embed)
+	
+@bot.command(pass_context=True)
+@commands.has_permissions(kick_members=True)
+async def warn(ctx, user: discord.Member, *, arg = None):
+	if arg is None:
+		await bot.say("please say a reason to {}".format(user.name))
+		return False
+	reason = arg
+	author = ctx.message.author
+	server = ctx.message.server
+	embed = discord.Embed(title="Warn", description=" ", color=0x00ff00)
+	embed.add_field(name="User: ", value="<@{}>".format(user.id), inline=False)
+	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
+	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
+	await bot.say(embed=embed)
+	await bot.send_message(user, "You have been warned for: {}".format(reason))
+	await bot.send_message(user, "from: {} server".format(server))
+	
+@bot.command(pass_context=True)
+@commands.has_permissions(kick_members=True, ban_members=True, administrator=True)
+async def unban(con,user:int):
+    try:
+        who=await bot.get_user_info(user)
+        await bot.unban(con.message.server,who)
+        await bot.say("User has been unbanned")
+    except:
+        await bot.say("Something went wrong")
+    
+@bot.command(pass_context=True)
+@commands.check(user_is_me)
+async def msg(ctx, user: discord.Member, *, msg):
+	await bot.send_message(user, msg)
+	await bot.delete_message(ctx.message)
+	print(f"{ctx.message.author.name} from {ctx.message.server} used d!msg command")
+    
+@bot.command(name="promote", pass_context=True)
+@commands.has_permissions(administrator=True)
+async def _promote(ctx, user: discord.Member = None, *, name = None):
+	author = ctx.message.author
+	role = discord.utils.get(ctx.message.server.roles, name=name)
+	await bot.add_roles(user, role)
+	await bot.delete_message(ctx.message)
+	text = await bot.say(f"User {user.mention} has been promoted to {role.name} role".format(role.mention))
+	await asyncio.sleep(5)
+	await bot.delete_message(text)
+	print(f"{ctx.message.author.name} from {ctx.message.server} used d!promote command")
+	
+@_promote.error
+async def promote_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have a administrator permission.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+
+@bot.command(pass_context=True)
+async def help(ctx):
+	server = ctx.message.server
+	author = ctx.message.author
+	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!membercount", color=0xFFFF)
+	embed.add_field(name="ping", value="d!ping - get bot's ping time")
+	embed.add_field(name="eval", value="d!eval [Code] - Only noobperson can do this")
+	embed.add_field(name="clean", value="d!clean [messages] - clean the chat")
+	embed.add_field(name="say", value="d!say [Text] - Make the bot say something - don't abuse this.")
+	embed.add_field(name="d!info", value="get info about support server, and more.")
+	embed.add_field(name="d!serverinfo", value="get info about the server")
+	embed.add_field(name="d!membercount", value="to see how many members are in the server")
+	embed.add_field(name="addrole", value="d!addrole @user <role name>")
+	embed.add_field(name="removerole", value="d!removerole @user <role name>")
+	embed.add_field(name="d!c open", value="Tanki Online container (still adding more items")
+	embed.add_field(name="d!coinflip", value="50 50 chance of getting tails and heads")
+	embed.add_field(name="moderations", value="d!moderations - to get list of moderations")
+	embed.add_field(name="math", value="d!maths - to get list of math")
+	embed.add_field(name="userinfo", value="d!userinfo @user")
+	embed.add_field(name="bug", value="d!bug <your message here>")
+	embed.add_field(name="idea", value="d!idea <your message here>")
+	embed.set_thumbnail(url=server.icon_url)
+	embed.set_footer(text="Requested by: " + author.name)
+	await bot.say(embed=embed)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used help command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True)
+async def moderations(ctx):
+	embed = discord.Embed(title="ban", description="d!ban @user [your reason here]", color=0xFFFF)
+	embed.add_field(name="kick", value="d!kick @user [your reason here]")
+	embed.add_field(name="warn", value="d!warn @user [your reason here]")
+	embed.add_field(name="mute", value="d!mute @user [your reason here]")
+	embed.add_field(name="unmute", value="d!unmute @user [your reason here]")
+	embed.add_field(name="unban", value="d!unban user.id | for example d!unban 277983178914922497")
+	await bot.say(embed=embed)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used moderations command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+
+@bot.command(aliases=['ud'])
+async def urban(*msg):
+		word = ' '.join(msg)
+		api = "http://api.urbandictionary.com/v0/define"
+		response = requests.get(api, params=[("term", word)]).json()
+		embed = discord.Embed(description="No results found!", colour=0xFF0000)
+		if len(response["list"]) == 0:
+			return await bot.say(embed=embed)
+		embed = discord.Embed(title="Word", description=word, colour=embed.colour)
+		embed.add_field(name="Top definition:", value=response['list'][0]['definition'])
+		embed.add_field(name="Examples:", value=response['list'][0]["example"])
+		await bot.say(embed=embed)
+		channel = bot.get_channel('525109045221261312')
+		embed = discord.Embed(title=f"User: {ctx.message.author.name} have used urban command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+		await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True)
+async def maths(ctx):
+	embed = discord.Embed(title="math", description="d!math add (number) (number)", color=0xFFFF)
+	embed.add_field(name="math", value="d!math subtract (number) (number)")
+	embed.add_field(name="math", value="d!math multiply (number) (number)")
+	embed.add_field(name="math", value="d!math divide (number) (number)")
+	await bot.say(embed=embed)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used maths command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True)
+async def rules(ctx):
+	embed = discord.Embed(title="1. Please be respectful to everyone in here", description="Do not use any insult/profanity", color=0xFFFF)
+	embed.add_field(name="2. Do not spam in any channel", value="you can spam in #bot_spam_1 and #bot_spam_2 only")
+	await bot.delete_message(ctx.message)
+	await bot.say(embed=embed)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used help command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True, no_pm=True)
+async def membercount(ctx):
+	members = set(ctx.message.server.members)
+	bots = filter(lambda m: m.bot, members)
+	bots = set(bots)
+	users = members - bots
+	await bot.send_message(ctx.message.channel, embed=discord.Embed(title="Membercount", description="{} there is {} users and {} bots with a total of {} members in this server.".format(ctx.message.author.mention, len(users), len(bots), len(ctx.message.server.members)), colour=0X008CFF))
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used membercount command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+	
+@bot.command(name="setgame", pass_context=True, aliases=['game', 'presence'])
+@commands.check(user_is_me)
+async def _setgame(ctx, *args):
+	setgame = ' '.join(args)
+	await bot.change_presence(game=discord.Game(name=setgame))
+	await bot.delete_message(ctx.message)
+	await bot.say(":ballot_box_with_check: Game set to: `" + setgame + "`")
+	print("Game set to: `" + setgame + "`")
+	
+@_setgame.error
+async def setgame_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, only the bot owner can use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+        
+@bot.command(name="status", pass_context=True)
+@commands.check(user_is_me)
+async def _status(ctx, *args):
+	status = ' '.join(args)
+	await bot.change_presence(status=discord.Status(status))
+	await bot.delete_message(ctx.message)
+	await bot.say(":ballot_box_with_check: Status set to: `" + status + "`")
+	print("Status set to: `" + status + "`")
+	
+@_status.error
+async def status_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, only the bot owner can use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+	
+@bot.command(pass_context=True)
+async def botinfo(ctx):
+	embed=discord.Embed(title="I am created by noobperson#2436", description="I was created at April 2, 2018", color=0xFFFF00)
+	embed.add_field(name="Thank you letter", value="Thank you for reading and learning more about me :)")
+	await bot.say(embed=embed)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used botinfo command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True, no_pm=True)
+async def website():
+	embed = discord.Embed(title="my website", color=0xFFFF)
+	embed.add_field(name=":point_down:", value=f"[Click Here](http://tankionline.onuniverse.com/2018-10-13-8gch)")
+	await bot.say(embed=embed)
+	await bot.delete_message(message)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used website command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True, no_pm=True)
+async def join(ctx):
+	channel = ctx.message.author.voice.voice_channel
+	await bot.join_voice_channel(channel)
+	
+@bot.command(pass_context=True, no_pm=True)
+async def leave(ctx):
+	server = ctx.message.server
+	voice_bot = bot.voice_channel_in(server)
+	await voice_bot.disconnect()
+
+@bot.command(pass_context=True, no_pm=True)
+async def play(ctx, url):
+	server = ctx.message.server
+	voice_bot = bot.voice_bot_in(server)
+	player = await voice_bot.create_ytdl_player(url)
+	players[server.id] = player
+	player.start()
+
+@bot.command()
+async def update():
+	embed=discord.Embed(title="I have been updated to latest version", color=0xff9393)
+	await bot.say(embed=embed)
+	print(f"{ctx.message.author.name} from {ctx.message.server} used d!update command")
+
+@bot.command(name="say", pass_context=True)
+@commands.has_permissions(administrator=True)
+async def _say(ctx, *, msg = None):
+    await bot.delete_message(ctx.message)
+
+    if not msg: await bot.say("Please specify a message to send")
+    else: await bot.say(msg)
+    return
+    channel = bot.get_channel('525109045221261312')
+    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used say command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    await bot.send_message(channel, embed=embed)
+    
+@_say.error
+async def say_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, you do not have a administrator permission to use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+    
+@bot.command(name="clean", pass_context=True, no_pm=True)
+@commands.has_permissions(administrator=True)
+async def _clean(ctx, amount=100):
+    channel = ctx.message.channel
+    messages = [ ]
+    async for message in bot.logs_from(channel, limit=int(amount) + 1):
+        messages.append(message)
+    await bot.delete_messages(messages)
+    msg = await bot.say(f"{amount} message has been deleted.")
+    await asyncio.sleep(5)
+    await bot.delete_message(msg)
+    channel = bot.get_channel('525109045221261312')
+    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used clean command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    await bot.send_message(channel, embed=embed)
+    
+@_clean.error
+async def clean_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have a administrator permission to use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+		
+@bot.command(name="purge", pass_context=True, no_pm=True)
+@commands.has_permissions(administrator=True)
+async def _purge(ctx, amount=100):
+    channel = ctx.message.channel
+    messages = [ ]
+    async for message in bot.logs_from(channel, limit=int(amount) + 1):
+        messages.append(message)
+    await bot.delete_messages(messages)
+    channel = bot.get_channel('525109045221261312')
+    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used purge command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    await bot.send_message(channel, embed=embed)
+    
+@_purge.error
+async def purge_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have a administrator permission to use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+    
+@bot.command(pass_context=True)
+@commands.check(user_is_me)
+async def broadcast(ctx, *, msg):
+    for server in bot.servers:
+        for channel in server.channels:
+            try:
+                await bot.send_message(channel, msg)
+            except Exception:
+                continue
+            else:
+                break
+
+@bot.command(name="addrole", pass_context=True)
+@commands.has_permissions(administrator=True)
+async def _addrole(ctx, user: discord.Member = None, *, name = None):
+    author = ctx.message.author
+    role = discord.utils.get(ctx.message.server.roles, name=name)
+    await bot.add_roles(user, role)
+    text = await bot.say(f'{author.mention} I have added the {role.name} role to a user {user.name}'.format(role.name))
+    await bot.delete_message(ctx.message)
+    await asyncio.sleep(1)
+    await bot.delete_message(text)
+    channel = bot.get_channel('525109045221261312')
+    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used addrole command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    await bot.send_message(channel, embed=embed)
+    
+@_addrole.error
+async def addrole_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have a administrator permission to use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+
+@bot.command(name="removerole", pass_context=True)
+@commands.has_permissions(administrator=True)
+async def _removerole(ctx, user: discord.Member = None, *, name = None):
+	author = ctx.message.author
+	role = discord.utils.get(ctx.message.server.roles, name=name)
+	await bot.remove_roles(user, role)
+	text = await bot.say(f'{author.mention} I have removed the {role.name} role from a user {user.name}'.format(role.name))
+	await bot.delete_message(ctx.message)
+	await asyncio.sleep(1)
+	await bot.delete_message(text)
+	channel = bot.get_channel('525109045221261312')
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used removerole command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
+	
+@_removerole.error
+async def removerole_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have a administrator permission to use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+	
+@bot.group()
+async def math():
+    pass
+    
+@math.command(pass_context=True, no_pm=True)
+async def add(ctx, a: int, b:int):
+	await bot.say("{} + {} = {}".format(a, b, a+b))
+	
+@math.command(pass_context=True, no_pm=True)
+async def subtract(ctx, a: int, b:int):
+	await bot.say("{} - {} = {}".format(a, b, a-b))
+	
+@math.command(pass_context=True, no_pm=True)
+async def multiply(ctx, a: int, b:int):
+	await bot.say("{} x {} = {}".format(a, b, a*b))
+	
+@math.command(pass_context=True, no_pm=True)
+async def divide(ctx, a: int, b:int):
+	await bot.say("{} ÷ {} = {}".format(a, b, a/b))
+	
+bot.run(os.environ['BOT_TOKEN'])
