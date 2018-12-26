@@ -4,12 +4,10 @@ import inspect
 import time
 from discord.utils import get
 import random
-import youtube_dl
 import requests
 import random
 import json
 import asyncio
-from itertools import cycle
 import traceback
 import aiohttp
 import datetime
