@@ -52,11 +52,6 @@ async def on_message(message):
 		await bot.send_message(message.channel, msg)
 	await bot.process_commands(message)
 	
-@bot.command(pass_context=True, aliases=['xmas', 'chrimbo'])
-async def christmas(ctx):
-	"""Christmas countdown!"""
-	await bot.say("**" + str(diff.days) + "**" + " day(s) left until Christmas day! :christmas_tree:")
-	
 @bot.command()
 async def square(number):
     squared_value = int(number) * int(number)
@@ -185,7 +180,7 @@ async def ratings(ctx, user: str):
     async with aiohttp.get(url) as r:
     	data = await r.json()
     	try:
-    		embed = discord.Embed(title = data["name"], description=" ", color=0xFFFF)
+		embed = discord.Embed(title = data["name"], description=" ", color=0xFFFF)
     		embed.add_field(name = "Rank", value = data["Rank"])
     		embed.add_field(name = "XP", value = data["Experience"])
     		embed.add_field(name = "K/D", value = data["Kills/Deaths Ratio"])
@@ -350,7 +345,7 @@ async def addrank(ctx, *, name = None):
 	server = ctx.message.server
 	role = discord.utils.get(ctx.message.server.roles, name=name)
 	await bot.create_role(server, name=name)
-	text = await bot.say("a role has been created by {}".format(author.mention))
+	text = await bot.say("{} created a role {}".format(author.mention, role.name))
 	
 @bot.command(pass_context=True)
 @commands.check(user_is_me)
@@ -419,6 +414,7 @@ async def info(ctx):
 	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/bweznkF)")
 	embed.add_field(name="Donate", value=f"[Link](https://www.paypal.me/noobpersonTO2)")
 	embed.add_field(name="vote my bot", value=f"[Link](https://discordbots.org/bot/409253229491126285/vote)")
+	embed.set_thumbnail(url=bot.user.avatar_url)
 	embed.set_footer(text=" | {}".format(bot.user.name), icon_url=bot.user.avatar_url)
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
@@ -615,7 +611,7 @@ async def rules(ctx):
 	await bot.delete_message(ctx.message)
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used help command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used rules command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True, no_pm=True)
