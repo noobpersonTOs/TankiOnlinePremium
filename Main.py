@@ -4,7 +4,6 @@ import inspect
 import time
 from discord.utils import get
 import random
-import requests
 import random
 import json
 import asyncio
