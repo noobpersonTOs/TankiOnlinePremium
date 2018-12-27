@@ -133,9 +133,22 @@ async def stats():
 	servers = list(bot.servers)
 	embed = discord.Embed(title="Servers:", description=f"{str(len(servers))}", color=0xFFFF)
 	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
-	embed.add_field(name="Uptime:", value=f"{h} hours, {m} minutes, and {s} seconds.format(d=days, h=hours, m=minutes, s=seconds)
 	await bot.say(embed=embed)
 
+@bot.command(pass_context=True)
+async def uptime(ctx: commands.Context):
+	now = datetime.datetime.utcnow()
+	delta = now - start_time
+	hours, remainder = divmod(int(delta.total_seconds()), 3600)
+	minutes, seconds = divmod(remainder, 60)
+	days, hours = divmod(hours, 24)
+	if days:
+		time_format = "{d} days, {h} hours, {m} minutes, and {s} seconds."
+	else:
+		time_format = "{h} hours, {m} minutes, and {s} seconds."
+		uptime_stamp = time_format.format(d=days, h=hours, m=minutes, s=seconds)
+		await bot.say("{} has been up for {}".format(bot.user.name, uptime_stamp))
+			
 @bot.command(pass_context=True)
 async def serverinfo(ctx):
     '''Displays Info About The Server!'''
