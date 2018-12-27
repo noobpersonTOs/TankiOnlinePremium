@@ -125,29 +125,12 @@ async def staffrequest(ctx, *, msg):
 	await bot.send_message(owner, " Requested by " + author.name)
 	await bot.delete_message(ctx.message)
 	
-@bot.command(pass_context=True, description='Tells you long a user has been offline or online.')
-async def useruptime(ctx, name : str):
-    # convert name to mid if possible
-    if ctx.message.server:
-        # Not a PM
-        user = ctx.message.server.get_member_named(name)
-    else:
-        # person pm'd the bot, so search all our servers
-        user = None
-        for server in bot.servers:
-            user = server.get_member_named(name)
-            if user:
-                break
-    if not user:
-        await bot.say('Sorry, I couldn\'t find a user named \'{0}\'.'.format(name))
-    else:
-        await bot.say(get_human_readable_user_uptime(name, user.id))
-	
 @bot.command()
 async def stats():
 	servers = list(bot.servers)
 	embed = discord.Embed(title="Servers:", description=f"{str(len(servers))}", color=0xFFFF)
 	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
+	embed.add_field(name='Uptime', value='{0:.0f} Hours, {1:.0f} Minutes {2:.0f} Seconds\n'.format(hours, minutes, seconds), inline=False)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
