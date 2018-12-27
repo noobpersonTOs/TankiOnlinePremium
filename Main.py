@@ -11,6 +11,9 @@ import traceback
 import aiohttp
 import datetime
 import os
+import datetime
+
+start_time = datetime.datetime.utcnow() # Timestamp of when it came online
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("d!"))
 bot.remove_command('help')
@@ -130,8 +133,9 @@ async def stats():
 	servers = list(bot.servers)
 	embed = discord.Embed(title="Servers:", description=f"{str(len(servers))}", color=0xFFFF)
 	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
+	embed.add_field(name="Uptime:", value=f"{h} hours, {m} minutes, and {s} seconds.format(d=days, h=hours, m=minutes, s=seconds)
 	await bot.say(embed=embed)
-	
+
 @bot.command(pass_context=True)
 async def serverinfo(ctx):
     '''Displays Info About The Server!'''
