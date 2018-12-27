@@ -130,7 +130,6 @@ async def stats():
 	servers = list(bot.servers)
 	embed = discord.Embed(title="Servers:", description=f"{str(len(servers))}", color=0xFFFF)
 	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
-	embed.add_field(name="Uptime:", value=f"{hours} hours {minutes} minutes {seconds} seconds\n'.format(hours, minutes, seconds)
 	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
