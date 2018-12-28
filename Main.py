@@ -56,6 +56,12 @@ async def on_message(message):
 async def square(number):
     squared_value = int(number) * int(number)
     await bot.say(str(number) + " squared is " + str(squared_value))
+
+@bot.command()
+async def gif():
+	embed = discord.Embed(title="Here's some gif :)", description=" ")
+	embed.set_Image(url="https://goo.gl/images/aB9zJW.png)
+	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
