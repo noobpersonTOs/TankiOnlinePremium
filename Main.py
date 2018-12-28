@@ -1,7 +1,6 @@
-import discord
+import discord, datetime, time
 from discord.ext import commands
 import inspect
-import time
 from discord.utils import get
 import random
 import random
@@ -11,9 +10,6 @@ import traceback
 import aiohttp
 import datetime
 import os
-import datetime
-
-start_time = datetime.datetime.utcnow() # Timestamp of when it came online
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("d!"))
 bot.remove_command('help')
@@ -131,23 +127,13 @@ async def staffrequest(ctx, *, msg):
 @bot.command()
 async def stats():
 	servers = list(bot.servers)
+	current_time = time.time()
+	difference = int(round(current_time - start_time))
+	text = str(datetime.timedelta(seconds=difference))
 	embed = discord.Embed(title="Servers:", description=f"{str(len(servers))}", color=0xFFFF)
 	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
+	embed.add_field(name="Uptime:", value=f"{text}")
 	await bot.say(embed=embed)
-
-@bot.command(pass_context=True)
-async def uptime(ctx: commands.Context):
-	now = datetime.datetime.utcnow()
-	delta = now - start_time
-	hours, remainder = divmod(int(delta.total_seconds()), 3600)
-	minutes, seconds = divmod(remainder, 60)
-	days, hours = divmod(hours, 24)
-	if days:
-		time_format = "{d} days, {h} hours, {m} minutes, and {s} seconds."
-	else:
-		time_format = "{h} hours, {m} minutes, and {s} seconds."
-		uptime_stamp = time_format.format(d=days, h=hours, m=minutes, s=seconds)
-		await bot.say("{} has been up for {}".format(bot.user.name, uptime_stamp))
 			
 @bot.command(pass_context=True)
 async def serverinfo(ctx):
@@ -543,8 +529,9 @@ async def help(ctx):
 	author = ctx.message.author
 	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!botinfo", color=0xFFFF)
 	embed.add_field(name="bot info", value="d!botinfo")
+	embed.add_field(name="stats", value="d!stats - to get how many servers the bot is in and how many users and uptime")
 	embed.add_field(name="ping", value="d!ping - get bot's ping time")
-	embed.add_field(name="eval", value="d!eval [Code] - Only noobperson can do this")
+	embed.add_field(name="eval", value="d!eval [Code] - Only bot owner can do this")
 	embed.add_field(name="clean", value="d!clean [messages] - clean the chat")
 	embed.add_field(name="say", value="d!say [Text] - Make the bot say something - don't abuse this.")
 	embed.add_field(name="d!info", value="get info about support server, and more.")
