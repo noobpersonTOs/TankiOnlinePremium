@@ -8,8 +8,9 @@ import json
 import asyncio
 import traceback
 import aiohttp
-import datetime
 import os
+
+start_time = time.time()
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("d!"))
 bot.remove_command('help')
