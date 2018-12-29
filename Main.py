@@ -125,6 +125,14 @@ async def staffrequest(ctx, *, msg):
 	await bot.send_message(owner, " Requested by " + author.name)
 	await bot.delete_message(ctx.message)
 	
+@bot.command(pass_context=True)
+async def botinfo(ctx):
+	embed=discord.Embed(title="Bot name", description="Tanki Online", color=0xFFFF00)
+	embed.add_field(name="Creator", value="noobperson#2436")
+	embed.add_field(name="Invite link", value="[Click Here!](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=2146958839&scope=bot)")
+	embed.add_field(name="Prefix", value="d!")
+	await bot.say(embed=embed)
+	
 @bot.command()
 async def stats():
 	servers = list(bot.servers)
