@@ -697,7 +697,7 @@ async def join(con,*,channel=None):
 
             if voice != None:            
                 if voice.type == discord.ChannelType.voice:
-                     await bot.voice_client_in(con.message.server).move_to(voice)
+                     await bot.voice_bot_in(con.message.server).move_to(voice)
 	
 @bot.command(pass_context=True)
 async def leave(con):
