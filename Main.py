@@ -9,7 +9,6 @@ import asyncio
 import traceback
 import aiohttp
 import os
-import youtube_dl
 
 start_time = time.time()
 
@@ -644,63 +643,6 @@ async def _status(ctx, *args):
 async def status_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
 		text = "Sorry {}, only the bot owner can use this command.".format(ctx.message.author.mention)
-		
-@bot.command(pass_context=True)
-async def join(ctx):
-	channel = ctx.message.author.voice.voice_channel
-	await bot.join_voice_channel(channel)
-	
-@bot.command(pass_context=True)
-async def leave(con):
-    """LEAVE THE VOICE CHANNEL AND STOP ALL SONGS AND CLEAR QUEUE"""
-    # COMMAND USED IN DM
-    if con.message.channel.is_private == True:
-        await bot.send_message(con.message.channel, "**You must be in a `server text channel` to use this command**")
-
-    # COMMAND NOT IN DM
-    if con.message.channel.is_private == False:
-
-        # IF VOICE IS NOT CONNECTED
-        if bot.is_voice_connected(con.message.server) == False:
-            await bot.send_message(con.message.channel, "**Bot is not connected to a voice channel**")
-
-        # VOICE ALREADY CONNECTED
-        if bot.is_voice_connected(con.message.server) == True:
-            bot.loop.create_task(queue_songs(con, False, True))
-
-@bot.command(pass_context=True)
-async def play(con, *, url):
-    """PLAY THE GIVEN SONG AND QUEUE IT IF THERE IS CURRENTLY SOGN PLAYING"""
-    if con.message.channel.is_private == True:
-        await bot.send_message(con.message.channel, "**You must be in a `server text channel` to use this command**")
-
-    if con.message.channel.is_private == False: #command is used in a server
-        rq_channel[con.message.server.id]=con.message.channel.id
-        if bot.is_voice_connected(con.message.server) == False:
-            await bot.join_voice_channel(con.message.author.voice.voice_channel)
-
-        if bot.is_voice_connected(con.message.server) == True:
-            if player_status[con.message.server.id] == True:
-                song_names[con.message.server.id].append(url)
-                r = rq.Session().get('https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q={}&key=put your youtube token here'.format(url)).json()
-                await bot.send_message(con.message.channel, "**Song `{}` Queued**".format(r['items'][0]['snippet']['title']))
-
-            if player_status[con.message.server.id] == False:
-                player_status[con.message.server.id] = True
-                song_names[con.message.server.id].append(url)
-                song = await bot.voice_client_in(con.message.server).create_ytdl_player(song_names[con.message.server.id][0], ytdl_options=opts, after=lambda: bot.loop.create_task(after_song(con, False, False)))
-                servers_songs[con.message.server.id] = song
-                servers_songs[con.message.server.id].start()
-                r = rq.Session().get('https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q={}&key=AIzaSyDy4gizNmXYWykfUACzU_RsaHtKVvuZb9k'.format(url)).json()
-                pack = discord.Embed(title=r['items'][0]['snippet']['title'],
-                                     url="https://www.youtube.com/watch?v={}".format(r['items'][0]['id']['videoId']))
-                pack.set_thumbnail(
-                    url=r['items'][0]['snippet']['thumbnails']['default']['url'])
-                pack.add_field(name="Requested by:",
-                               value=con.message.author.name)
-                msg = await bot.send_message(con.message.channel, embed=pack)
-                now_playing[con.message.server.id] = msg
-                song_names[con.message.server.id].pop(0)
 
 @bot.command(name="say", pass_context=True)
 @commands.has_permissions(administrator=True)
