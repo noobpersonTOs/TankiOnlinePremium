@@ -9,7 +9,6 @@ import asyncio
 import traceback
 import aiohttp
 import os
-import youtube_dl
 
 start_time = time.time()
 
