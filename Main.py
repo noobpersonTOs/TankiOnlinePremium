@@ -643,61 +643,11 @@ async def _status(ctx, *args):
 async def status_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
 		text = "Sorry {}, only the bot owner can use this command.".format(ctx.message.author.mention)
-		await bot.send_message(ctx.message.channel, text)
-	
+		
 @bot.command(pass_context=True)
-async def botinfo(ctx):
-	embed=discord.Embed(title="Bot name", description="Tanki Online", color=0xFFFF00)
-	embed.add_field(name="Creator", value="noobperson#2436")
-	embed.add_field(name="Invite link", value="[Click Here!](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=2146958839&scope=bot)")
-	embed.add_field(name="Prefix", value="d!")
-	await bot.say(embed=embed)
-	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used botinfo command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
-	await bot.send_message(channel, embed=embed)
-	
-@bot.command(pass_context=True, no_pm=True)
-async def website():
-	embed = discord.Embed(title="my website", color=0xFFFF)
-	embed.add_field(name=":point_down:", value=f"[Click Here](http://tankionline.onuniverse.com/2018-10-13-8gch)")
-	await bot.say(embed=embed)
-	await bot.delete_message(message)
-	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used website command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
-	await bot.send_message(channel, embed=embed)
-	
-@bot.command(pass_context=True)
-async def join(con,*,channel=None):
-    """JOIN A VOICE CHANNEL THAT THE USR IS IN OR MOVE TO A VOICE CHANNEL IF THE BOT IS ALREADY IN A VOICE CHANNEL"""
-
-
-    # COMMAND IS IN DM
-    if con.message.channel.is_private == True:
-        await bot.send_message(con.message.channel, "**You must be in a `server text channel` to use this command**")
-
-    # COMMAND NOT IN DM
-    if con.message.channel.is_private == False:
-        voice_status = bot.is_voice_connected(con.message.server)
-
-        voice=find(lambda m:m.name == channel,con.message.server.channels)
-
-        if voice_status == False and channel == None:  # VOICE NOT CONNECTED
-            if con.message.author.voice_channel == None:
-                await bot.send_message(con.message.channel,"**You must be in a voice channel or give a voice channel name to join**")
-            if con.message.author.voice_channel != None:
-                await bot.join_voice_channel(con.message.author.voice.voice_channel)
-
-        if voice_status == False and channel != None:  # PICKING A VOICE CHANNEL
-            await bot.join_voice_channel(voice)
-
-        if voice_status == True:  # VOICE ALREADY CONNECTED
-            if voice == None:
-                await bot.send_message(con.message.channel, "**Bot is already connected to a voice channel**")
-
-
-            if voice != None:            
-                if voice.type == discord.ChannelType.voice:
-                     await bot.voice_bot_in(con.message.server).move_to(voice)
+async def join(ctx):
+	channel = ctx.message.author.voice.voice_channel
+	await bot.join_voice_channel(channel)
 	
 @bot.command(pass_context=True)
 async def leave(con):
