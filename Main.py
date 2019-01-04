@@ -422,7 +422,7 @@ async def info(ctx):
 @commands.has_permissions(kick_members=True, administrator=True)
 async def mute(ctx, user: discord.Member, *, arg):
 	if arg is None:
-		await bot.say("please say a reason to {}".format(user.name))
+		await bot.say("please provide a reason to {}".format(user.name))
 		return False
 	reason = arg
 	author = ctx.message.author
@@ -438,7 +438,7 @@ async def mute(ctx, user: discord.Member, *, arg):
 @commands.has_permissions(kick_members=True, administrator=True)
 async def unmute(ctx, user: discord.Member, *, arg):
 	if arg is None:
-		await bot.say("please say a reason to {}".format(user.name))
+		await bot.say("please provide a reason to {}".format(user.name))
 		return False
 	reason = arg
 	author = ctx.message.author
@@ -454,7 +454,7 @@ async def unmute(ctx, user: discord.Member, *, arg):
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, user: discord.Member, *, arg):
 	if arg is None:
-		await bot.say("please say a reason to {}".format(user.name))
+		await bot.say("please provide a reason to {}".format(user.name))
 		return False
 	reason = arg
 	author = ctx.message.author
@@ -469,7 +469,7 @@ async def kick(ctx, user: discord.Member, *, arg):
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, user: discord.Member, *, arg):
 	if arg is None:
-		await bot.say("please say a reason to {}".format(user.name))
+		await bot.say("please provide a reason to {}".format(user.name))
 		return False
 	reason = arg
 	author = ctx.message.author
@@ -484,7 +484,7 @@ async def ban(ctx, user: discord.Member, *, arg):
 @commands.has_permissions(kick_members=True)
 async def warn(ctx, user: discord.Member, *, arg = None):
 	if arg is None:
-		await bot.say("please say a reason to {}".format(user.name))
+		await bot.say("please provide a reason to {}".format(user.name))
 		return False
 	reason = arg
 	author = ctx.message.author
@@ -722,7 +722,7 @@ async def broadcast(ctx, *, msg):
                 break
 
 @bot.command(name="addrole", pass_context=True)
-@commands.has_permissions(administrator=True)
+@commands.has_permissions(administrator=True, manage_roles=True)
 async def _addrole(ctx, user: discord.Member = None, *, name = None):
     author = ctx.message.author
     role = discord.utils.get(ctx.message.server.roles, name=name)
@@ -738,11 +738,11 @@ async def _addrole(ctx, user: discord.Member = None, *, name = None):
 @_addrole.error
 async def addrole_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
-		text = "Sorry {}, You don't have a administrator permission to use this command.".format(ctx.message.author.mention)
+		text = "Sorry {}, You don't have a manage roles permission to use this command.".format(ctx.message.author.mention)
 		await bot.send_message(ctx.message.channel, text)
 
 @bot.command(name="removerole", pass_context=True)
-@commands.has_permissions(administrator=True)
+@commands.has_permissions(administrator=True, manage_roles=True)
 async def _removerole(ctx, user: discord.Member = None, *, name = None):
 	author = ctx.message.author
 	role = discord.utils.get(ctx.message.server.roles, name=name)
@@ -758,7 +758,7 @@ async def _removerole(ctx, user: discord.Member = None, *, name = None):
 @_removerole.error
 async def removerole_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
-		text = "Sorry {}, You don't have a administrator permission to use this command.".format(ctx.message.author.mention)
+		text = "Sorry {}, You don't have a manage roles permission to use this command.".format(ctx.message.author.mention)
 		await bot.send_message(ctx.message.channel, text)
 	
 @bot.group()
