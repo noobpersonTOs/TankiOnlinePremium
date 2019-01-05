@@ -122,7 +122,7 @@ async def reverse(self, ctx, *, msg: str):
 async def renamechannel(ctx, channel: discord.Channel, *, new_name):
     channel = ctx.message.channel
     await channel.edit(name=new_name)
-    await bot.say("channel have been renamed to {}".format(channe))
+    await bot.say("channel have been renamed to {}".format(channel))
 	
 @bot.command(pass_context=True)
 async def staffrequest(ctx, *, msg):
