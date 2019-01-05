@@ -415,7 +415,7 @@ async def info(ctx):
 	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/bweznkF)")
 	embed.add_field(name="Donate", value=f"[Link](https://www.paypal.me/noobpersonTO2)")
 	embed.add_field(name="vote my bot", value=f"[Link](https://discordbots.org/bot/409253229491126285/vote)")
-	embed.set_thumbnail(url=https://cdn.discordapp.com/avatars/409253229491126285/b6a655353cf088ea82f91c281cb97e86.png?size=1024))
+	embed.set_thumbnail(url=https://cdn.discordapp.com/avatars/409253229491126285/b6a655353cf088ea82f91c281cb97e86.png?size=1024)
 	embed.set_footer(text=" | {}".format(bot.user.name), icon_url=https://cdn.discordapp.com/avatars/409253229491126285/b6a655353cf088ea82f91c281cb97e86.png?size=1024)
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
