@@ -117,6 +117,13 @@ async def reverse(self, ctx, *, msg: str):
 	"""ffuts esreveR"""
 	await bot.say(msg[::-1])
 	
+
+@bot.command(pass_context=True)
+async def renamechannel(ctx, channel: discord.VoiceChannel, *, new_name):
+    channel = ctx.message.channel
+    await channel.edit(name=new_name)
+    await bot.say("channel have been renamed to {}".format(channe))
+	
 @bot.command(pass_context=True)
 async def staffrequest(ctx, *, msg):
 	owner = ctx.message.server.owner
