@@ -406,7 +406,7 @@ async def userinfo(ctx, user: discord.Member = None):
 	
 @bot.command(pass_context=True)
 async def userinfos(ctx, user: discord.Member = None):
-    roles = [role for role in member.roles]
+    roles = [role for role in user.roles]
     embed = discord.Embed(colour=user.colour, timestamp=ctx.message.timestamp)
     embed.set_author(name=user)
     embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
