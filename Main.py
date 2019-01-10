@@ -410,7 +410,7 @@ async def userinfos(ctx, user: discord.Member = None):
     embed = discord.Embed(colour=user.colour, timestamp=ctx.message.timestamp)
     embed.set_author(name=user)
     embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
-    embed.add_field(name="ID:", value=member.id)
+    embed.add_field(name="ID:", value=user.id)
     embed.add_field(name="Guild name:", value=user.display_name)
     embed.add_field(name="Created at:", value=user.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
     embed.add_field(name="Joined at:", value=user.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline=False)
