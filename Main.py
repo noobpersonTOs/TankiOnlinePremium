@@ -387,7 +387,6 @@ async def idea(ctx, *, reportmsg: str):
 		
 @bot.command(pass_context=True, no_pm=True)
 async def userinfo(ctx, user: discord.Member = None):
-	roles = [role for role in user.roles]
 	if user is None:
 		user = ctx.message.author
 	embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0x00ff00)
@@ -395,8 +394,7 @@ async def userinfo(ctx, user: discord.Member = None):
 	embed.add_field(name="ID:", value=user.id, inline=True)
 	embed.add_field(name="Status:", value=user.status, inline=True)
 	embed.add_field(name='Playing Status:', value=user.game, inline=True)
-	embed.add_field(name=f"Roles({len(roles)})", value=" ".join([role.mention for role in roles]))
-	embed.add_field(name="Top Role:", value=user.top_role.mention, inline=True)
+	embed.add_field(name="Highest Role:", value=user.top_role.mention, inline=True)
 	embed.add_field(name="Account Created:", value=user.created_at.strftime("%A, %B %d %Y %H:%M:%S %p"))
 	embed.add_field(name="Joined At:", value=user.joined_at.strftime("%A, %B %d %Y %H:%M:%S %p"))
 	embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
