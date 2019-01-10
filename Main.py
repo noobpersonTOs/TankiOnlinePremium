@@ -387,6 +387,7 @@ async def idea(ctx, *, reportmsg: str):
 		
 @bot.command(pass_context=True, no_pm=True)
 async def userinfo(ctx, user: discord.Member = None):
+	roles = [role for role in user.roles]
 	if user is None:
 		user = ctx.message.author
 	embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what I could find.", color=0x00ff00)
