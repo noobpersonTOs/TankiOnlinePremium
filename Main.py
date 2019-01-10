@@ -405,6 +405,20 @@ async def userinfo(ctx, user: discord.Member = None):
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
+async def userinfos(ctx, member: discord.Member = None):
+    roles = [role for role in member.roles]
+    embed = discord.Embed(colour=member.colour, timestamp=ctx.message.timestamp)
+    embed.set_author(name=member)
+    embed.set_thumbnail(url=member.avatar_url)
+    embed.add_field(name="ID:", value=member.id)
+    embed.add_field(name="Guild name:", value=member.display_name)
+    embed.add_field(name="Created at:", value=member.created_at.strftime("%a, %#d %B %Y, %Y, %I:%M %p UTC"))
+    embed.add_field(name="Joined at:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline=False)
+    embed.add_field(name=f"Roles ({len(roles)})", value=" ".join([role.mention for role in roles]))
+    embed.add_field(name="Top role:", value=member.top_role.mention)
+    await bot.send_message(ctx.message.channel, embed=embed)
+
+@bot.command(pass_context=True)
 async def info(ctx):
 	author = ctx.message.author
 	servers = list(bot.servers)
