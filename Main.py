@@ -405,17 +405,17 @@ async def userinfo(ctx, user: discord.Member = None):
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
-async def userinfos(ctx, member: discord.Member = None):
+async def userinfos(ctx, user: discord.Member = None):
     roles = [role for role in member.roles]
-    embed = discord.Embed(colour=member.colour, timestamp=ctx.message.timestamp)
-    embed.set_author(name=member)
-    embed.set_thumbnail(url=member.avatar_url)
+    embed = discord.Embed(colour=user.colour, timestamp=ctx.message.timestamp)
+    embed.set_author(name=user)
+    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
     embed.add_field(name="ID:", value=member.id)
-    embed.add_field(name="Guild name:", value=member.display_name)
-    embed.add_field(name="Created at:", value=member.created_at.strftime("%a, %#d %B %Y, %Y, %I:%M %p UTC"))
-    embed.add_field(name="Joined at:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline=False)
+    embed.add_field(name="Guild name:", value=user.display_name)
+    embed.add_field(name="Created at:", value=user.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
+    embed.add_field(name="Joined at:", value=user.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline=False)
     embed.add_field(name=f"Roles ({len(roles)})", value=" ".join([role.mention for role in roles]))
-    embed.add_field(name="Top role:", value=member.top_role.mention)
+    embed.add_field(name="Top role:", value=user.top_role.mention)
     await bot.send_message(ctx.message.channel, embed=embed)
 
 @bot.command(pass_context=True)
