@@ -15,12 +15,6 @@ start_time = time.time()
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("d!"))
 bot.remove_command('help')
 now = datetime.datetime.now()
-    
-@bot.event
-async def on_command_error(error, ctx):
-	channel = ctx.message.channel
-	if isinstance(error, commands.MissingRequiredArgument):
-		await bot.send_message(channel, "It seems you are missing required argument(s). Try again if you have all the arguements needed.")
 
 @bot.event
 async def on_ready():
