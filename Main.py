@@ -191,7 +191,7 @@ async def rating(ctx, user: str):
     print(f"{ctx.message.author.name} {ctx.message.author.id} from {ctx.message.server} used d!ratings command")
     			
 @bot.command(pass_context=True)
-async def report(ctx, *, reportmsg: str):
+async def noobs(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
     embed = discord.Embed(title=f"User: {ctx.message.author.name}", description=f"Report: {reportmsg}", color=0xff9393)        
     await bot.send_message(channel, embed=embed)
@@ -199,7 +199,7 @@ async def report(ctx, *, reportmsg: str):
     await bot.say(embed=embed)
     
 @bot.command(pass_context=True)
-async def suggest(ctx, *, reportmsg: str):
+async def noobs2(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
     msg = embed = discord.Embed(title=f"User: {ctx.message.author.name}", description=f"Suggestion: {reportmsg}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
@@ -406,6 +406,8 @@ async def userinfo(ctx, user: discord.Member = None):
 	
 @bot.command(pass_context=True)
 async def userinfos(ctx, user: discord.Member = None):
+	if user is None:
+		user = ctx.message.author
     roles = [role for role in user.roles]
     embed = discord.Embed(colour=user.colour, timestamp=ctx.message.timestamp)
     embed.set_author(name=user)
