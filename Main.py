@@ -435,7 +435,7 @@ async def info(ctx):
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True, administrator=True)
 async def mute(ctx, user: discord.Member = None, *, arg = None):
-	if used is None:
+	if user is None:
 		await bot.say("please provide a member")
 		return False
 	if arg is None:
