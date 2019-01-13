@@ -434,7 +434,10 @@ async def info(ctx):
 		
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True, administrator=True)
-async def mute(ctx, user: discord.Member, *, arg):
+async def mute(ctx, user: discord.Member = None, *, arg = None):
+	if used is None:
+		await bot.say("please provide a member")
+		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
@@ -450,7 +453,10 @@ async def mute(ctx, user: discord.Member, *, arg):
 	
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True, administrator=True)
-async def unmute(ctx, user: discord.Member, *, arg):
+async def unmute(ctx, user: discord.Member = None, *, arg = None):
+	if user is None:
+		await bot.say("please provide a member")
+		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
@@ -466,7 +472,10 @@ async def unmute(ctx, user: discord.Member, *, arg):
 
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, user: discord.Member, *, arg):
+async def kick(ctx, user: discord.Member = None, *, arg = None):
+	if user is None:
+		await bot.say("please provide a member")
+		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
@@ -481,7 +490,10 @@ async def kick(ctx, user: discord.Member, *, arg):
   
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members=True)
-async def ban(ctx, user: discord.Member, *, arg):
+async def ban(ctx, user: discord.Member = None, *, arg = None):
+	if user is None:
+		await bot.say("please provide a member")
+		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
@@ -496,7 +508,10 @@ async def ban(ctx, user: discord.Member, *, arg):
 	
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
-async def warn(ctx, user: discord.Member, *, arg = None):
+async def warn(ctx, user: discord.Member = None, *, arg = None):
+	if user is None:
+		await bot.say("please provide a member")
+		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
