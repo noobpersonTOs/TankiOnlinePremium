@@ -432,9 +432,9 @@ async def info(ctx):
 	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used info command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 		
-@bot.command(pass_context=True)
+@bot.command(name="mute", pass_context=True)
 @commands.has_permissions(kick_members=True, administrator=True)
-async def mute(ctx, user: discord.Member = None, *, arg = None):
+async def _mute(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
 		await bot.say("please provide a member")
 		return False
@@ -451,9 +451,16 @@ async def mute(ctx, user: discord.Member = None, *, arg = None):
 	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
 	await bot.say(embed=embed)
 	
-@bot.command(pass_context=True)
+
+@_mute.error
+async def mute_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have requirement permission to use this command `kick_members`.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+	
+@bot.command(name="unmute", pass_context=True)
 @commands.has_permissions(kick_members=True, administrator=True)
-async def unmute(ctx, user: discord.Member = None, *, arg = None):
+async def _unmute(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
 		await bot.say("please provide a member")
 		return False
@@ -469,10 +476,17 @@ async def unmute(ctx, user: discord.Member = None, *, arg = None):
 	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
 	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
 	await bot.say(embed=embed)
+	
 
-@bot.command(pass_context=True)
+@_unmute.error
+async def unmute_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have requirement permission to use this command `kick_members`.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
+
+@bot.command(name="kick", pass_context=True)
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, user: discord.Member = None, *, arg = None):
+async def _kick(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
 		await bot.say("please provide a member")
 		return False
@@ -487,6 +501,13 @@ async def kick(ctx, user: discord.Member = None, *, arg = None):
 	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
 	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
 	await bot.say(embed=embed)
+	
+
+@_kick.error
+async def kick_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have requirement permission to use this command `kick_members`.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
   
 @bot.command(pass_context=True)
 @commands.has_permissions(ban_members=True)
@@ -505,6 +526,13 @@ async def ban(ctx, user: discord.Member = None, *, arg = None):
 	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
 	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
 	await bot.say(embed=embed)
+	
+
+@_ban.error
+async def ban_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have requirement permission to use this command `ban_members`.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
 	
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
@@ -525,6 +553,13 @@ async def warn(ctx, user: discord.Member = None, *, arg = None):
 	await bot.say(embed=embed)
 	await bot.send_message(user, "You have been warned for: {}".format(reason))
 	await bot.send_message(user, "from: {} server".format(server))
+	
+
+@_warn.error
+async def warn_error(error, ctx):
+	if isinstance(error, discord.ext.commands.errors.CheckFailure):
+		text = "Sorry {}, You don't have requirement permission to use this command `kick_members`.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
 	
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True, ban_members=True, administrator=True)
