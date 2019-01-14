@@ -509,9 +509,9 @@ async def kick_error(error, ctx):
 		text = "Sorry {}, You don't have requirement permission to use this command `kick_members`.".format(ctx.message.author.mention)
 		await bot.send_message(ctx.message.channel, text)
   
-@bot.command(pass_context=True)
+@bot.command(name="ban", pass_context=True)
 @commands.has_permissions(ban_members=True)
-async def ban(ctx, user: discord.Member = None, *, arg = None):
+async def _ban(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
 		await bot.say("please provide a member")
 		return False
@@ -534,9 +534,9 @@ async def ban_error(error, ctx):
 		text = "Sorry {}, You don't have requirement permission to use this command `ban_members`.".format(ctx.message.author.mention)
 		await bot.send_message(ctx.message.channel, text)
 	
-@bot.command(pass_context=True)
+@bot.command(name="warn", pass_context=True)
 @commands.has_permissions(kick_members=True)
-async def warn(ctx, user: discord.Member = None, *, arg = None):
+async def _warn(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
 		await bot.say("please provide a member")
 		return False
