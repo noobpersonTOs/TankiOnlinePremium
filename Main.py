@@ -171,7 +171,7 @@ async def serverinfo(ctx):
     join.add_field(name = 'ID', value = str(server.id))
     join.add_field(name = 'Member Count', value = str(server.member_count));
     join.add_field(name = 'Text/Voice Channels', value = str(channelz));
-    join.add_field(name="Server Roles", value = str(len(ctx.message.server.roles) - 1));
+    join.add_field(name = '__Roles (%s)__'%str(role_length), value = roles);
     join.set_footer(text ='Created: %s'%time);
 
     return await bot.say(embed = join);
