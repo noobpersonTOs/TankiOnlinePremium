@@ -441,6 +441,8 @@ async def _mute(ctx, user: discord.Member = None, *, arg = None):
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
+	if user.server_permissions.kick_members:
+		return False
 	reason = arg
 	author = ctx.message.author
 	role = discord.utils.get(ctx.message.server.roles, name="Muted")
@@ -466,6 +468,8 @@ async def _unmute(ctx, user: discord.Member = None, *, arg = None):
 		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
+		return False
+	if user.server_permissions.kick_members:
 		return False
 	reason = arg
 	author = ctx.message.author
@@ -493,6 +497,8 @@ async def _kick(ctx, user: discord.Member = None, *, arg = None):
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
+	if user.server_permissions.kick_members:
+		return False
 	reason = arg
 	author = ctx.message.author
 	await bot.kick(user)
@@ -518,6 +524,8 @@ async def _ban(ctx, user: discord.Member = None, *, arg = None):
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
+	if user.server_permissions.ban_members:
+		return False
 	reason = arg
 	author = ctx.message.author
 	await bot.ban(user)
@@ -542,6 +550,8 @@ async def _warn(ctx, user: discord.Member = None, *, arg = None):
 		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
+		return False
+	if user.server_permissions.kick_members:
 		return False
 	reason = arg
 	author = ctx.message.author
