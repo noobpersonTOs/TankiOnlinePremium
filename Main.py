@@ -136,7 +136,7 @@ async def botinfo(ctx):
 async def bans(ctx):
     x = await bot.get_bans(ctx.message.server)
     x = '\n'.join([y.name for y in x])
-    embed = discord.Embed(title = "List of The Banned", description = x, color = 0xFFFFF)
+    embed = discord.Embed(title = "Ban list", description = x, color = 0xFFFFF)
     return await bot.say(embed = embed)
 	
 @bot.command()
