@@ -131,6 +131,14 @@ async def botinfo(ctx):
 	embed.add_field(name="Prefix", value="d!")
 	await bot.say(embed=embed)
 	
+@bot.command(pass_context = True)
+@commands.has_permissions(administrator=True) 
+async def bans(ctx):
+    x = await bot.get_bans(ctx.message.server)
+    x = '\n'.join([y.name for y in x])
+    embed = discord.Embed(title = "List of The Banned", description = x, color = 0xFFFFF)
+    return await bot.say(embed = embed)
+	
 @bot.command()
 async def stats():
 	servers = list(bot.servers)
