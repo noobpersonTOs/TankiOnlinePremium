@@ -432,7 +432,7 @@ async def info(ctx):
 	embed.add_field(name="Invite", value=f"[Link](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=2146958839&scope=bot)")
 	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/bweznkF)")
 	embed.add_field(name="Donate", value=f"[Link](https://www.paypal.me/noobpersonTO2)")
-	embed.add_field(name="vote my bot", value=f"[Link](https://discordbots.org/bot/409253229491126285/vote)")
+	embed.add_field(name="Upvote me", value=f"[Link](https://discordbots.org/bot/409253229491126285/vote)")
 	embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/409253229491126285/b6a655353cf088ea82f91c281cb97e86.png?size=1024")
 	embed.set_footer(text=" | {}".format(bot.user.name), icon_url="https://cdn.discordapp.com/avatars/409253229491126285/b6a655353cf088ea82f91c281cb97e86.png?size=1024")
 	await bot.say(embed=embed)
