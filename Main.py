@@ -461,7 +461,6 @@ async def _mute(ctx, user: discord.Member = None, *, arg = None):
 	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
 	await bot.say(embed=embed)
 	
-
 @_mute.error
 async def mute_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
@@ -489,7 +488,6 @@ async def _unmute(ctx, user: discord.Member = None, *, arg = None):
 	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
 	await bot.say(embed=embed)
 	
-
 @_unmute.error
 async def unmute_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
@@ -516,7 +514,6 @@ async def _kick(ctx, user: discord.Member = None, *, arg = None):
 	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
 	await bot.say(embed=embed)
 	
-
 @_kick.error
 async def kick_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
@@ -543,7 +540,6 @@ async def _ban(ctx, user: discord.Member = None, *, arg = None):
 	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
 	await bot.say(embed=embed)
 	
-
 @_ban.error
 async def ban_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
@@ -572,7 +568,6 @@ async def _warn(ctx, user: discord.Member = None, *, arg = None):
 	await bot.send_message(user, "You have been warned for: {}".format(reason))
 	await bot.send_message(user, "from: {} server".format(server))
 	
-
 @_warn.error
 async def warn_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
@@ -733,6 +728,7 @@ async def _status(ctx, *args):
 async def status_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
 		text = "Sorry {}, only the bot owner can use this command.".format(ctx.message.author.mention)
+		await bot.send_message(ctx.message.channel, text)
 
 @bot.command(name="say", pass_context=True)
 @commands.has_permissions(administrator=True)
