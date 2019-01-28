@@ -420,6 +420,7 @@ async def userinfos(ctx, user: discord.Member = None):
 	embed.add_field(name="Joined at:", value=user.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline=False)
 	embed.add_field(name=f"Roles ({len(roles)})", value=" ".join([role.mention for role in roles]))
 	embed.add_field(name="Top role:", value=user.top_role.mention)
+	embed.add_field(name="Date: ", value=user.message_at.strftime("%a, %#d %B %Y, %I: %M %p UTC"))
 	await bot.send_message(ctx.message.channel, embed=embed)
 
 @bot.command(pass_context=True)
