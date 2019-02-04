@@ -45,23 +45,23 @@ async def on_message(message):
 				if message.attachments != []:  # message has files
 					emb = discord.Embed()
 					emb.set_image(url=msg.attachments[0]['url'])
-					emb.set_footer(text="Image sent by: {}".format(msg.author.name))
-					emb.set_thumbnail(url=msg.author.avatar_url)
+					emb.set_footer(text="Image sent by: {}".format(message.author.name))
+					emb.set_thumbnail(url=message.author.avatar_url)
 					
 					await bot.send_message(discord.Object(id=i), embed=emb)
 				
 				if message.embeds != []:
 					emb = discord.Embed()
-					emb.set_footer(text="Sent by: {}".format(msg.author.name))
+					emb.set_footer(text="Sent by: {}".format(message.author.name))
 					try:
-						emb.set_image(url=msg.embeds[0]['image']['url'])
+						emb.set_image(url=message.embeds[0]['image']['url'])
 						emb.set_thumbnail(url=message.author.avatar_url)
 						await bot.send_message(discord.Object(id=i), embed=emb)
 					except:
 						pass
 				
-				if message.attachments == [] and msg.embeds == []:  # message has no files
-					emb = discord.Embed(title=msg.author.name,description=msg.content)
+				if message.attachments == [] and message.embeds == []:  # message has no files
+					emb = discord.Embed(title=message.author.name,description=message.content)
 					emb.set_footer(text="From {}".format(message.server.name))
 					await bot.send_message(discord.Object(id=i), embed=emb)
 	await bot.process_commands(message)
