@@ -37,7 +37,7 @@ async def on_ready():
 	
 @bot.event
 async def on_message(msg):
-    if msg.server and msg.channel.name == 'kurusaki_text_channel' and msg.author.id != bot.user.id:
+    if msg.server and msg.channel.name == 'tanki_online' and msg.author.id != bot.user.id:
         for i in saki_chans:
             if i == msg.channel.id:
                 pass
