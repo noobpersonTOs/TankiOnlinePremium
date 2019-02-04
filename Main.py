@@ -42,10 +42,10 @@ async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
-    
+	
 @bot.event
 async def on_message(msg):
-    if msg.server and msg.channel.name == 'tanki_online_test' and msg.author.id != bot.user.id:
+    if msg.server and msg.channel.name == 'tanki_online' and msg.author.id != bot.user.id:
         for i in saki_chans:
             if i == msg.channel.id:
                 pass
@@ -63,7 +63,7 @@ async def on_message(msg):
                     emb.set_footer(text="Sent by: {}".format(msg.author.name))
                     try:
                         emb.set_image(url=msg.embeds[0]['image']['url'])
-                        emb.set_footer(text="Sent by: {}".format(msg.author.name))
+                        emb.set_thumbnail(url=msg.author.avatar_url)
                         await bot.send_message(discord.Object(id=i), embed=emb)
                     except:
                         pass
@@ -72,7 +72,8 @@ async def on_message(msg):
                     emb=discord.Embed(title=msg.author.name,description=msg.content)
                     emb.set_footer(text="From {}".format(msg.server.name))
                     await bot.send_message(discord.Object(id=i),embed=emb)
-		await bot.process_commands(msg)
+
+	await bot.process_commands(msg)
 	
 @bot.command()
 async def square(number):
