@@ -72,25 +72,7 @@ async def on_message(msg):
                     emb=discord.Embed(title=msg.author.name,description=msg.content)
                     emb.set_footer(text="From {}".format(msg.server.name))
                     await bot.send_message(discord.Object(id=i),embed=emb)
-		
-		if msg.content.startswith("d!c open"):
-			randomcontainer = ["You found a uncommon item: Repair kit", "You found a common item: 125 Double Armor", "You found a common item: 125 Double Damage", "You found a common item: 125 speed boost", "You found a common item: 125 mines", "You found a exotic item: Firebird XT", "You found a exotic item: Freeze XT", "You found a exotic item: Ricochet XT", "You found a exotic item: Vulcan XT", "You found a exotic item: Thunder XT", "You found a exotic item: Railgun XT", "You found a exotic item: Smoky XT", "You found a exotic item: Wasp XT", "You found a exotic item: Hornet XT", "You found a exotic item: Viking XT", "You found a exotic item: Titan XT", "You found a exotic item: Mammoth XT", "You found a rare item: Lava paint", "You found a rare item: Lead paint", "You found a rare item: Invader paint", "You found a rare item: Safari paint", "You found a rare item: Dragon paint", "You found a rare item: Magma paint", "You found a rare item: Mary paint", "You found a rare item: Sahara paint", "You found a rare item: Night paint", "You found a rare item: Storm paint", "You found a rare item: In Love paint", "You found a rare item: Carbon paint", "You found a rare item: Confetti paint", "You found a rare item: Alien paint", "You found a rare item: Chainmail", "You found a rare item: Dirty paint", "You found a rare item: Jaguar paint", "You found a rare item: Desert", "You found a rare item: Guerrila paint", "You found a rare item: Swash paint", "You found a rare item: Harlequin paint", "You found a rare item: Pixel paint", "You found a rare item: Corrosion paint", "You found a epic item: Frost paint", "You found a epic item: Golden Star paint", "You found a epic item: Archnid paint", "You found a epic item: Liquid Metal paint", "You found a epic item: Drought paint", "You found a epic item: Strawberry paint", "You found a epic item: Barber Shop paint", "You found a epic item: Scandinavia paint", "You found a epic item: Lunar Soil paint", "You found a epic item: Rust paint", "You found a epic item: Steak paint", "You found a epic item: Amber paint", "You found a epic item: Lime paint", "You found a epic item: Neuron paint", "You found a epic item: Domino paint", "You found a epic item: Mint paint", "You found a epic item: Watercolor paint"]
-			await bot.send_message(message.channel, (random.choice(randomcontainer)))
-		
-		if msg.content.upper().startswith("NOOB DYNO"):
-			msgs = ("Don't insult my friend Dyno! :angry:                                                                                                                         you are noob {0.author.mention}!").format(message)
-			await bot.send_message(message.channel, msgs)
-		
-		if msg.content.upper().startswith('D!8BALL'):
-			ball8 = (['It is certain','As i see it, yes', 'Dont count on it', 'Without a doubt', 'Definitely', 'Very doubtful', 'Outlook not so good', 'My sources say no', 'My reply is no', 'Most likely', 'You may rely on it', 'Ask again later'])
-			await bot.send_message(message.channel,(random.choice(ball8)))
-		if msg.content.upper().startswith('HELLO BOT'):
-			msgs = "hello {0.author.mention}".format(message)
-			await bot.send_message(message.channel, msgs)
-		if msg.content.startswith('d!hello'):
-			msgs = "hello {0.author.mention}".format(message)
-			await bot.send_message(message.channel, msgs)
-	await bot.process_commands(msg)
+		await bot.process_commands(msg)
 	
 @bot.command()
 async def square(number):
