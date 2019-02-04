@@ -57,8 +57,8 @@ async def on_message(msg):
 						emb.set_image(url=msg.embeds[0]['image']['url'])
 						emb.set_thumbnail(url=msg.author.avatar_url)
 						await bot.send_message(discord.Object(id=i), embed=emb)
-						except:
-							pass
+					except:
+						pass
 				
 				if msg.attachments == [] and msg.embeds == []:  # message has no files
 					emb = discord.Embed(title=msg.author.name,description=msg.content)
