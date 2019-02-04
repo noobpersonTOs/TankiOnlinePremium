@@ -20,7 +20,7 @@ saki_chans=[]
 async def get_saki_chans():
 	for i in bot.servers:
 		for x in i.channels:
-			if x.type == discord.ChannelType.text and x.name == 'tanki_online_test' and x.id not in saki_chans:
+			if x.type == discord.ChannelType.text and x.name == 'tanki_online' and x.id not in saki_chans:
 				saki_chans.append(x.id)
 				print(saki_chans)
 
