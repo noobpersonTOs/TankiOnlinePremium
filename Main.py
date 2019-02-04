@@ -3,7 +3,6 @@ from discord.ext import commands
 import inspect
 from discord.utils import get
 import random
-import random
 import json
 import asyncio
 import traceback
@@ -38,33 +37,34 @@ async def on_ready():
 	
 @bot.event
 async def on_message(msg):
-	if msg.server and msg.channel.name == 'tanki_online' and msg.author.id != bot.user.id:
-		for i in saki_chans:
-			if i == msg.channel.id:
-				pass
-			else:
-				if msg.attachments != []:  # message has files
-					emb = discord.Embed()
-					emb.set_image(url=msg.attachments[0]['url'])
-					emb.set_footer(text="Image sent by: {}".format(msg.author.name))
-					emb.set_thumbnail(url=msg.author.avatar_url)
-					await bot.send_message(discord.Object(id=i), embed=emb)
-				
-				if msg.embeds != []:
-					emb = discord.Embed()
-					emb.set_footer(text="Sent by: {}".format(msg.author.name))
-				try:
-					emb.set_image(url=msg.embeds[0]['image']['url'])
-					emb.set_thumbnail(url=msg.author.avatar_url)
-					await bot.send_message(discord.Object(id=i), embed=emb)
-				except:
-					pass
-				
-				if msg.attachments == [] and msg.embeds == []:  # message has no files
-					emb=discord.Embed(title=msg.author.name,description=msg.content)
-					emb.set_footer(text="From {}".format(msg.server.name))
-					await bot.send_message(discord.Object(id=i),embed=emb)
-				
+    if msg.server and msg.channel.name == 'kurusaki_text_channel' and msg.author.id != bot.user.id:
+        for i in saki_chans:
+            if i == msg.channel.id:
+                pass
+            else:
+                if msg.attachments != []:  # message has files
+                    emb = discord.Embed()
+                    emb.set_image(url=msg.attachments[0]['url'])
+                    emb.set_footer(text="Image sent by: {}".format(msg.author.name))
+                    emb.set_thumbnail(url=msg.author.avatar_url)
+
+                    await bot.send_message(discord.Object(id=i), embed=emb)
+
+                if msg.embeds != []:
+                    emb = discord.Embed()
+                    emb.set_footer(text="Sent by: {}".format(msg.author.name))
+                    try:
+                        emb.set_image(url=msg.embeds[0]['image']['url'])
+                        emb.set_thumbnail(url=msg.author.avatar_url)
+                        await bot.send_message(discord.Object(id=i), embed=emb)
+                    except:
+                        pass
+
+                if msg.attachments == [] and msg.embeds == []:  # message has no files
+                    emb=discord.Embed(title=msg.author.name,description=msg.content)
+                    emb.set_footer(text="From {}".format(msg.server.name))
+                    await bot.send_message(discord.Object(id=i),embed=emb)
+
 	await bot.process_commands(msg)
 	
 @bot.command()
