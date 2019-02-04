@@ -64,8 +64,7 @@ async def on_message(msg):
                     emb=discord.Embed(title=msg.author.name,description=msg.content)
                     emb.set_footer(text="From {}".format(msg.server.name))
                     await bot.send_message(discord.Object(id=i),embed=emb)
-		
-		await bot.process_commands(msg)
+	await bot.process_commands(msg)
 	
 @bot.command()
 async def square(number):
