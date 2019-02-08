@@ -61,7 +61,7 @@ async def on_message(message):
 						pass
 				
 				if message.attachments == [] and message.embeds == []:  # message has no files
-					emb = discord.Embed(title=message.author, description=message.content)
+					emb = discord.Embed(title=message.author.name, description=message.content)
 					emb.set_footer(text="From {}".format(message.server.name))
 					await bot.send_message(discord.Object(id=i), embed=emb)
 	await bot.process_commands(message)
