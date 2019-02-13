@@ -165,8 +165,8 @@ async def ratings(ctx, user: str):
     async with aiohttp.get(url) as r:
         if r.status == 200:
             try:
-                response = (await r.json ())["response"]
-                await bot.send_typing(ctx.message.channel)
+		response = (await r.json ())["response"]
+		await bot.send_typing(ctx.message.channel)
 		kills = response["kills"]
 		deaths = response["deaths"]
 		crystals = response["earnedCrystals"]
