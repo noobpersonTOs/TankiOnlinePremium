@@ -517,6 +517,12 @@ async def multicolor_error(error, ctx):
 		await bot.send_message(ctx.message.channel, text)
 		
 @bot.command(pass_context=True)
+@commands.check(user_is_me)
+async def leave(ctx, *args):
+	server = bot.get_server(*args)
+	await bot.leave_server(server)
+		
+@bot.command(pass_context=True)
 async def coinflip(ctx):
     user = ctx.message.author
     side = random.randint(0, 1)
