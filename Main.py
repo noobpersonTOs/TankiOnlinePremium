@@ -391,7 +391,7 @@ async def ratings(ctx, user: str):
 				gold = response["caughtGolds"]
 				experience = response["score"]
 				premium = response["hasPremium"]
-				rank = response["rankTag"]
+				rank = response["rank"]
 				gearscore = response["gearScore"]
 				embed = discord.Embed(title="Statistics for {}".format(user), url="http://ratings.tankionline.com/en/user/{}/".format(user), \
 						      descrption="Tanki Online", color=0x42d9f4)
