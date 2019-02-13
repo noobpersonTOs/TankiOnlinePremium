@@ -20,11 +20,8 @@ async def on_ready():
 	print('Logged in as')
 	print(bot.user.name)
 	print(bot.user.id)
-	
-@bot.event
-async def on_message(message):
-	if message.content.startswith("d!c open"):
-		cont = ["<:Common:408412670900043779> **|**  You've just received **3,500 Crystals**. This isn't going to help you at all. Keep trying!",
+
+cont = ["<:Common:408412670900043779> **|**  You've just received **3,500 Crystals**. This isn't going to help you at all. Keep trying!",
         "<:Common:408412670900043779> **|**  You've just received **125 Double Armor**. Here's some supplies to help you out from druggers!",
         "<:Common:408412670900043779> **|**  You've just received **125 Double Damage**. Here's some supplies to help you out from druggers!",
         "<:Common:408412670900043779> **|**  You've just received **125 Speed Boost**. Here's some supplies to help you out from druggers!",
