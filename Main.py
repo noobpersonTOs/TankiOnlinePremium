@@ -174,6 +174,7 @@ async def ratings(ctx, user: str):
 				premium = response["hasPremium"]
 				embed = discord.Embed(title="Statistics for {}".format(user), url="http://ratings.tankionline.com/en/user/{}/".format(user), \
 						      descrption="Tanki Online", color=0x42d9f4)
+				embed.add_field(name="Nickname", value="{}".format(user))
 				embed.add_field(name="Premium Account", value="{}".format(premium))
 				embed.add_field(name="Experience", value="{:,}".format(experience))
 				embed.add_field(name="Crystals Obtained", value="{:,}".format(crystals))
