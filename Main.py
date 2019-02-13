@@ -611,7 +611,7 @@ async def promote_error(error, ctx):
 async def help(ctx):
 	server = ctx.message.server
 	author = ctx.message.author
-	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!ratings", color=0xFFFF)
+	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!ratings noobperson", color=0xFFFF)
 	embed.add_field(name="ratings", value="d!ratings (user)")
 	embed.add_field(name="bot info", value="d!botinfo")
 	embed.add_field(name="stats", value="d!stats - to get how many servers the bot is in and how many users and uptime")
