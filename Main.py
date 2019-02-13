@@ -202,22 +202,34 @@ async def serverinfo(ctx):
     join.set_footer(text ='Created: %s'%time);
 
     return await bot.say(embed = join);
-	
+
 @bot.command(pass_context=True)
-async def rating(ctx, user: str):
-    url = "https://ratings.tankionline.com/api/eu/profile/?user={}".format(user)
-    response = requests.get(url)
-    value = response.json() ["user"]["Rank"]["Experience"]["Crystals"]["Golds"]["Premium"]["Kills"]["Deaths"]
-    embed = discord.Embed(title = "User", description ='{}\n'.format(Nickname), color=0xFFFFF)
-    embed.add_field(name = "Rank", value ='{}\n'.format(Rank))
-    embed.add_field(name = "Experience", value ='{}\n'.format(Experience))
-    embed.add_field(name = "Crystals", value ='{}\n'.format(EarnedCrystals))
-    embed.add_field(name = "Golds", value ='{}\n'.format(CaughtGolds))
-    embed.add_field(name = "Premium", value ='{}\n'.format(HasPremium))
-    embed.add_field(name = "Kills", value ='{}\n'.format(KillsCount))
-    embed.add_field(name = "Deaths", value ='{}\n'.format(DeathsCount))
-    await bot.say(embed=embed)
-    print(f"{ctx.message.author.name} {ctx.message.author.id} from {ctx.message.server} used d!ratings command")
+async def ratings(ctx, user: str):
+    """Shows statisitcs about a player by doing >ratings nickname"""
+    url = "http://ratings.tankionline.com/get_stat/profile/?user={}&lang=en".format(user)
+    async with aiohttp.get(url) as r:
+        if r.status == 200:
+            try:
+                response = (await r.json ())["response"]
+                await bot.send_typing(ctx.message.channel)
+                kills = response["kills"]
+                deaths = response["deaths"]
+                crystals = response["earnedCrystals"]
+                gold = response["caughtGolds"]
+                experience = response["score"]
+                premium = response["hasPremium"]
+                embed=discord.Embed(title="Statistics for {}".format(user), url="http://ratings.tankionline.com/en/user/{}/".format(user), \
+                                    descrption="Tanki Online", color=0x42d9f4)
+                embed.add_field(name="Premium Account", value="{}".format(premium))
+                embed.add_field(name="Experience", value="{:,}".format(experience))
+                embed.add_field(name="Crystals Obtained", value="{:,}".format(crystals))
+                embed.add_field(name="Gold Boxes Caught", value="{:,}".format(gold))
+                embed.add_field(name="Kills", value="{:,}".format(kills))
+                embed.add_field(name="Deaths", value="{:,}".format(deaths))
+                embed.add_field(name="KD", value="{0:.2f}".format(kills/deaths))
+                await bot.say(embed=embed)
+            except:
+                await bot.say("Account does not exist.")
     			
 @bot.command(pass_context=True)
 async def noobs(ctx, *, reportmsg: str):
