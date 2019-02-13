@@ -167,13 +167,13 @@ async def ratings(ctx, user: str):
             try:
                 response = (await r.json ())["response"]
                 await bot.send_typing(ctx.message.channel)
-		rank = response["Rank"]
                 kills = response["kills"]
                 deaths = response["deaths"]
                 crystals = response["earnedCrystals"]
                 gold = response["caughtGolds"]
                 experience = response["score"]
                 premium = response["hasPremium"]
+		rank = response["Rank"]
                 embed=discord.Embed(title="Statistics for {}".format(user), url="http://ratings.tankionline.com/en/user/{}/".format(user), \
                                     descrption="Tanki Online", color=0x42d9f4)
 		embed.add_field(name="Rank", value="{}".format(rank))
