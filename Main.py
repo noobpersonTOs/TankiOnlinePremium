@@ -14,57 +14,12 @@ start_time = time.time()
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("d!"))
 bot.remove_command('help')
 now = datetime.datetime.now()
-
-saki_chans=[]
-async def get_saki_chans():
-	for i in bot.servers:
-		for x in i.channels:
-			if x.type == discord.ChannelType.text and x.name == 'tanki_online' and x.id not in saki_chans:
-				saki_chans.append(x.id)
-				print(saki_chans)
-
-@bot.event
-async def on_channel_create(chan):
-	if chan.id not in saki_chans:
-		saki_chans.append(chan.id)
                  
 @bot.event
 async def on_ready():
-	bot.loop.create_task(get_saki_chans())
 	print('Logged in as')
 	print(bot.user.name)
 	print(bot.user.id)
-	
-@bot.event
-async def on_message(message):
-	if message.server and message.channel.name == 'tanki_online' and message.author.id != bot.user.id:
-		for i in saki_chans:
-			if i == message.channel.id:
-				pass
-			else:
-				if message.attachments != []:  # message has files
-					emb = discord.Embed()
-					emb.set_image(url=msg.attachments[0]['url'])
-					emb.set_footer(text="Image sent by: {}".format(message.author.name))
-					emb.set_thumbnail(url=message.author.avatar_url)
-					
-					await bot.send_message(discord.Object(id=i), embed=emb)
-				
-				if message.embeds != []:
-					emb = discord.Embed()
-					emb.set_footer(text="Sent by: {}".format(message.author.name))
-					try:
-						emb.set_image(url=message.embeds[0]['image']['url'])
-						emb.set_thumbnail(url=message.author.avatar_url)
-						await bot.send_message(discord.Object(id=i), embed=emb)
-					except:
-						pass
-				
-				if message.attachments == [] and message.embeds == []:  # message has no files
-					emb = discord.Embed(title=message.author.name, description=message.content)
-					emb.set_footer(text="From {}".format(message.server.name))
-					await bot.send_message(discord.Object(id=i), embed=emb)
-	await bot.process_commands(message)
 	
 @bot.command()
 async def square(number):
@@ -212,6 +167,7 @@ async def ratings(ctx, user: str):
             try:
                 response = (await r.json ())["response"]
                 await bot.send_typing(ctx.message.channel)
+		rank = response["Rank"]
                 kills = response["kills"]
                 deaths = response["deaths"]
                 crystals = response["earnedCrystals"]
@@ -220,6 +176,7 @@ async def ratings(ctx, user: str):
                 premium = response["hasPremium"]
                 embed=discord.Embed(title="Statistics for {}".format(user), url="http://ratings.tankionline.com/en/user/{}/".format(user), \
                                     descrption="Tanki Online", color=0x42d9f4)
+		embed.add_field(name="Rank", value="{}".format(rank))
                 embed.add_field(name="Premium Account", value="{}".format(premium))
                 embed.add_field(name="Experience", value="{:,}".format(experience))
                 embed.add_field(name="Crystals Obtained", value="{:,}".format(crystals))
