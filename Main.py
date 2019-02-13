@@ -294,7 +294,7 @@ async def autobaselink(ctx):
 @bot.command(pass_context=True)
 async def c_open(ctx):
 	await bot.send_typing(ctx.message.channel)
-	embed = discord.Embed(title="Tanki Online", url="https://discord.gg/qBHXyWd", \
+	embed = discord.Embed(title="Tanki Online", url="https://discord.gg/bweznkF", \
 			      descrption="Tanki Online", color=0x42d9f4)
 	embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 	embed.add_field(name="Container", value=random.choice(cont))
