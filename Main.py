@@ -239,7 +239,8 @@ async def on_message(message):
 		embed = discord.Embed(title="Tanki Online", url="https://discord.gg/bweznkF", descrption="Tanki Online", color=0x42d9f4)
 		embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 		embed.add_field(name="Container", value=random.choice(cont))
-	await bot.send_message(channel, embed=embed)
+		await bot.send_message(channel, embed=embed)
+	await bot.process_commands(message):
 	
 @bot.command()
 async def square(number):
