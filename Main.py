@@ -301,15 +301,6 @@ async def autobaselink(ctx):
 		await bot.delete_message(ctx.message)
 		await asyncio.sleep(5)
 		await bot.delete_message(text)
-		
-@bot.command(pass_context=True)
-async def c_open(ctx):
-	await bot.send_typing(ctx.message.channel)
-	embed = discord.Embed(title="Tanki Online", url="https://discord.gg/bweznkF", \
-			      descrption="Tanki Online", color=0x42d9f4)
-	embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
-	embed.add_field(name="Container", value=random.choice(cont))
-	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 async def reverse(self, ctx, *, msg: str):
@@ -848,7 +839,7 @@ async def help(ctx):
 	server = ctx.message.server
 	author = ctx.message.author
 	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!ratings noobperson", color=0xFFFF)
-	embed.add_field(name="ratings", value="d!ratings (user)")
+	embed.add_field(name="ratings", value="d!ratings <user>")
 	embed.add_field(name="bot info", value="d!botinfo")
 	embed.add_field(name="stats", value="d!stats - to get how many servers the bot is in and how many users and uptime")
 	embed.add_field(name="ping", value="d!ping - get bot's ping time")
@@ -859,7 +850,7 @@ async def help(ctx):
 	embed.add_field(name="d!membercount", value="to see how many members are in the server")
 	embed.add_field(name="addrole", value="d!addrole @user <role name>")
 	embed.add_field(name="removerole", value="d!removerole @user <role name>")
-	embed.add_field(name="d!c open", value="Temporary Disabled dont use")
+	embed.add_field(name="d!c open", value="opening containers (still adding more items)")
 	embed.add_field(name="d!coinflip", value="50 50 chance of getting tails and heads")
 	embed.add_field(name="moderations", value="d!moderations - to get list of moderations")
 	embed.add_field(name="math", value="d!maths - to get list of math")
