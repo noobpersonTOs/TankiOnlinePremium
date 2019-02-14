@@ -233,7 +233,7 @@ cont = ["<:Common:408412670900043779> **|**  You found a common item: **3,500 Cr
 
 @bot.event
 async def on_message(message):
-	if message.content.starswith("d!c open"):
+	if message.content.startswith("d!c open"):
 		await bot.send_typing(message.message.channel)
 		embed = discord.Embed(title="Tanki Online", url="https://discord.gg/bweznkF", descrption="Tanki Online", color=0x42d9f4)
 		embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
