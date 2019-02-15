@@ -393,7 +393,7 @@ async def ratings(ctx, user: str):
 				rank = response["rank"]
 				gearscore = response["gearScore"]
 				embed = discord.Embed(title="Tanki Online Ratings for {}".format(user), url="http://ratings.tankionline.com/en/user/{}/".format(user), \ 
-						      description="Tanki Online", color=0x42d9f4)
+						      description="Tanki Online", color=0x42d9f4))
 				embed.add_field(name="Nickname", value="{}".format(user))
 				embed.add_field(name="Rank", value="{}".format(rank))
 				embed.add_field(name="Premium Account", value="{}".format(premium))
