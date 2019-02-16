@@ -405,6 +405,9 @@ async def ratings(ctx, user: str):
 				embed.add_field(name="Deaths", value="{:,}".format(deaths))
 				embed.add_field(name="K/D", value="{0:.2f}".format(kills/deaths))
 				await bot.say(embed=embed)
+				channel = bot.get_channel('525109045221261312')
+				embed = discord.Embed(title=f"User: {ctx.message.author.name} have used ratings command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+				await bot.send_message(channel, embed=embed)
 			except:
 				await bot.say("Account does not exist.")
     			
