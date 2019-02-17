@@ -237,7 +237,7 @@ async def on_message(message):
 		embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", descrption="Tanki Online", color=0x42d9f4)
 		embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 		embed.add_field(name=" ", value=random.choice(cont)
-		embed.set_footer(text=" | {}".format(author), icon_url="https://imgur.com/yf0oeDe.png")
+		embed.set_footer(text=" | {}".format(author), icon_url="https://imgur.com/yf0oeDe.png"))
 		await bot.send_message(channel, embed=embed)
 	await bot.process_commands(message)
 	
