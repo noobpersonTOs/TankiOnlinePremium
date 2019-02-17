@@ -231,7 +231,7 @@ cont = ["**|*** You found a common item: **3,500 Crystals**",
 @bot.event
 async def on_message(message):
 	if message.content.startswith("d!c open"):
-		author = ctx.message.author
+		author = message.author
 		channel = message.channel
 		await bot.send_typing(message.channel)
 		embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", descrption="Tanki Online", color=0x42d9f4)
