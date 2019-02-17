@@ -392,7 +392,7 @@ async def ratings(ctx, user: str):
 				premium = response["hasPremium"]
 				ranks = response["rank"]
 				gearscore = response["gearScore"]
-				supplies = response["suppliesUsage"]
+				suppliesused = response["suppliesUsage"]
 				embed = discord.Embed(title="Statistics for {}".format(user), url="http://ratings.tankionline.com/en/user/{}/".format(user), \
 						      description="**Profile:**", color=0x42d9f4)
 				embed.add_field(name="Nickname", value="{}".format(user), inline=False)
@@ -401,7 +401,7 @@ async def ratings(ctx, user: str):
 				embed.add_field(name="Experience", value="{:,}".format(experience), inline=False)
 				embed.add_field(name="Crystals Obtained", value="{:,}".format(crystals), inline=False)
 				embed.add_field(name="Gold Boxes Caught", value="{:,}".format(gold), inline=False)
-				embed.add_field(name="Supplies Used", value="{:,}".format(supplies), inline=False)
+				embed.add_field(name="Supplies Used", value="{:,}".format(suppliesused), inline=False)
 				embed.add_field(name="Gear Score", value="{}".format(gearscore), inline=False)
 				embed.add_field(name="Kills", value="{:,}".format(kills), inline=False)
 				embed.add_field(name="Deaths", value="{:,}".format(deaths), inline=False)
