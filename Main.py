@@ -235,7 +235,7 @@ async def on_message(message):
 		await bot.send_typing(message.channel)
 		embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", descrption="Tanki Online", color=0x42d9f4)
 		embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
-		embed.add_field(name="container", value=random.choice(cont))
+		embed.add_field(name="Container", value=random.choice(cont))
 		await bot.send_message(channel, embed=embed)
 	await bot.process_commands(message)
 	
@@ -392,14 +392,12 @@ async def ratings(ctx, user: str):
 				premium = response["hasPremium"]
 				ranks = response["rank"]
 				gearscore = response["gearScore"]
-				scores = response["scoreLeft"]
 				embed = discord.Embed(title="Statistics for {}".format(user), url="http://ratings.tankionline.com/en/user/{}/".format(user), \
 						      description="**Profile:**", color=0x42d9f4)
 				embed.add_field(name="Nickname", value="{}".format(user), inline=False)
 				embed.add_field(name="Rank", value="{}".format(ranks), inline=False)
 				embed.add_field(name="Premium Account", value="{}".format(premium), inline=False)
 				embed.add_field(name="Experience", value="{:,}".format(experience), inline=False)
-				embed.add_field(name="Experience left", value="{:,}".format(scores), inline=False)
 				embed.add_field(name="Crystals Obtained", value="{:,}".format(crystals), inline=False)
 				embed.add_field(name="Gold Boxes Caught", value="{:,}".format(gold), inline=False)
 				embed.add_field(name="Gear Score", value="{}".format(gearscore), inline=False)
