@@ -234,12 +234,13 @@ async def square(number):
     await bot.say(str(number) + " squared is " + str(squared_value))
 	
 @bot.command(pass_context=True)
-async def c_open(ctx):
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def open_container(ctx):
 	await bot.send_typing(ctx.message.channel)
 	embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", description="Tanki Online", color=0x42d9f4)
 	embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 	embed.add_field(name="Container", value=random.choice(cont))
-	await bot.say(channel, embed=embed)
+	await bot.say(ctx.message.channel, embed=embed)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
@@ -847,7 +848,7 @@ async def help(ctx):
 	embed.add_field(name="d!membercount", value="to see how many members are in the server")
 	embed.add_field(name="addrole", value="d!addrole @user <role name>")
 	embed.add_field(name="removerole", value="d!removerole @user <role name>")
-	embed.add_field(name="d!c open", value="opening containers (still adding more items)")
+	embed.add_field(name="d!open_container", value="opening containers (still adding more items)")
 	embed.add_field(name="d!coinflip", value="50 50 chance of getting tails and heads")
 	embed.add_field(name="moderations", value="d!moderations - to get list of moderations")
 	embed.add_field(name="math", value="d!maths - to get list of math")
