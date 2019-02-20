@@ -235,7 +235,6 @@ async def square(number):
 	
 @bot.command(pass_context=True)
 async def c_open(ctx):
-	channel = ctx.message.channel
 	await bot.send_typing(ctx.message.channel)
 	embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", description="Tanki Online", color=0x42d9f4)
 	embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
