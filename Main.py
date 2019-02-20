@@ -234,7 +234,7 @@ async def square(number):
     await bot.say(str(number) + " squared is " + str(squared_value))
 	
 @bot.command(pass_context=True)
-async def c open(ctx):
+async def c_open(ctx):
 	channel = ctx.message.channel
 	await bot.send_typing(ctx.message.channel)
 	embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", description="Tanki Online", color=0x42d9f4)
