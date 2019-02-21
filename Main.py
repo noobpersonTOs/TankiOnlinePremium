@@ -233,13 +233,19 @@ async def square(number):
     squared_value = int(number) * int(number)
     await bot.say(str(number) + " squared is " + str(squared_value))
 	
-@bot.command(pass_context=True)
+@bot.command(name="c open", pass_context=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def open_container(ctx):
+async def _open_container(ctx):
 	embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", description=" ", color=0x42d9f4)
 	embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 	embed.add_field(name="Container", value=random.choice(cont))
 	await bot.say(embed=embed)
+	
+@open_container.error
+async def _open_container_error(error, ctx):
+    if isinstance(error, commands.CommandOnCooldown):
+    msg = ':exclamation: This command is on cooldown, please try again in {:.2f}s :exclamation:'.format(error.retry_after)
+    await bot.send_message(ctx.message.channel, msg)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
