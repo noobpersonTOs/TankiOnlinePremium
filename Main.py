@@ -230,7 +230,7 @@ cont = ["**|*** You found a common item: **3,500 Crystals**",
 
 @bot.event
 async def on_message(message):
-	if message.content.starswith(".............s"):
+	if message.content.startswith(".............s"):
 		embed = discord.Embed(title="Tanki Online", ur="https://discordbots.org/bot/409253229491126285", description=" ", color=0x42d9f4)
 		embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 		embed.add_field(name="Container", value=random.choice(cont))
