@@ -229,26 +229,19 @@ cont = ["**|*** You found a common item: **3,500 Crystals**",
         "**|** You found a legendary item: **Mosaic**"]
 
 @bot.event
-@commands.cooldown(1, 5, commands.BucketType.user)
 async def on_message(message):
-	if message.content.starswith("d!c open"):
+	if message.content.starswith(".............s"):
 		embed = discord.Embed(title="Tanki Online", ur="https://discordbots.org/bot/409253229491126285", description=" ", color=0x42d9f4)
 		embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 		embed.add_field(name="Container", value=random.choice(cont))
 		await bot.send_message(message.channel, embed=embed)
-		
-@on_message.error
-async def on_message_error(self, error, ctx):
-	if isinstance(error, commands.CommandOnCooldown):
-		msg = ':exclamation: This command is on cooldown, please try again in {:.2f}s :exclamation:'.format(error.retry_after)
-		await self.send_message(ctx.message.channel, msg)
 	
 @bot.command()
 async def square(number):
     squared_value = int(number) * int(number)
     await bot.say(str(number) + " squared is " + str(squared_value))
 	
-@bot.command(name="s", pass_context=True)
+@bot.command(name="open_container", pass_context=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def _open_container(ctx):
 	embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", description=" ", color=0x42d9f4)
