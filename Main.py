@@ -243,9 +243,9 @@ async def _open_container(ctx):
 	
 @open_container.error
 async def _open_container_error(error, ctx):
-    if isinstance(error, commands.CommandOnCooldown):
-    msg = ':exclamation: This command is on cooldown, please try again in {:.2f}s :exclamation:'.format(error.retry_after)
-    await bot.send_message(ctx.message.channel, msg)
+	if isinstance(error, commands.CommandOnCooldown):
+		msg = ':exclamation: This command is on cooldown, please try again in {:.2f}s :exclamation:'.format(error.retry_after)
+		await bot.send_message(ctx.message.channel, msg)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
