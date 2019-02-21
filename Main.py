@@ -241,8 +241,8 @@ async def _open_container(ctx):
 	embed.add_field(name="Container", value=random.choice(cont))
 	await bot.say(embed=embed)
 	
-@open_container.error
-async def _open_container_error(error, ctx):
+@_open_container.error
+async def open_container_error(error, ctx):
 	if isinstance(error, commands.CommandOnCooldown):
 		msg = ':exclamation: This command is on cooldown, please try again in {:.2f}s :exclamation:'.format(error.retry_after)
 		await bot.send_message(ctx.message.channel, msg)
