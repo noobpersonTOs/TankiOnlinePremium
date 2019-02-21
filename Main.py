@@ -235,6 +235,7 @@ async def on_message(message):
 		embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 		embed.add_field(name="Container", value=random.choice(cont))
 		await bot.send_message(message.channel, embed=embed)
+	await bot.process_commands(message)
 	
 @bot.command()
 async def square(number):
