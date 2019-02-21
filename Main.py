@@ -239,7 +239,7 @@ async def open_container(ctx):
 	embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", description=" ", color=0x42d9f4)
 	embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 	embed.add_field(name="Container", value=random.choice(cont))
-	await bot.say(ctx.message.channel, embed=embed)
+	await bot.say(embed=embed)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
