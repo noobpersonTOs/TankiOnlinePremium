@@ -229,7 +229,7 @@ cont = ["**|*** You found a common item: **3,500 Crystals**",
         "**|** You found a legendary item: **Mosaic**"]
 
 @bot.event
-@event.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def on_message(message):
 	if message.content.starswith("d!c open"):
 		embed = discord.Embed(title="Tanki Online", ur="https://discordbots.org/bot/409253229491126285", description=" ", color=0x42d9f4)
