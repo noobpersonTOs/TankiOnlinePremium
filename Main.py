@@ -852,7 +852,7 @@ async def promote_error(error, ctx):
 async def help(ctx):
 	server = ctx.message.server
 	author = ctx.message.author
-	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!ratings noobperson", color=0xFFFF)
+	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!ratings noobperson")
 	embed.add_field(name="ratings", value="d!ratings <user>")
 	embed.add_field(name="bot info", value="d!botinfo")
 	embed.add_field(name="stats", value="d!stats - to get how many servers the bot is in and how many users and uptime")
@@ -880,11 +880,11 @@ async def help(ctx):
 	
 @bot.command(pass_context=True)
 async def moderations(ctx):
-	embed = discord.Embed(title="ban", description="d!ban @user [your reason here]", color=0xFFFF)
-	embed.add_field(name="kick", value="d!kick @user [your reason here]")
-	embed.add_field(name="warn", value="d!warn @user [your reason here]")
-	embed.add_field(name="mute", value="d!mute @user [your reason here]")
-	embed.add_field(name="unmute", value="d!unmute @user [your reason here]")
+	embed = discord.Embed(title="mute", description="`d!mute [member] [reason]`", color=0xFFFF)
+	embed.add_field(name="unmute", value="`d!unmute [member] [reason]`")
+	embed.add_field(name="kick", value="`d!kick [member] [reason]`")
+	embed.add_field(name="ban", value="`d!ban @user [reason]`")
+	embed.add_field(name="warn", value="`d!warn @user [reason]`")
 	embed.add_field(name="unban", value="d!unban user.id | for example d!unban 277983178914922497")
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
