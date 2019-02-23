@@ -816,13 +816,13 @@ async def warn_error(error, ctx):
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True, ban_members=True, administrator=True)
 async def unban(con,user:int):
-    try:
-        who=await bot.get_user_info(user)
-        await bot.unban(con.message.server,who)
-        await bot.say("User has been unbanned")
-    except:
-        await bot.say("Something went wrong")
-	await bot.say("Usage: `{}unban [member id]`".format(ctx.prefix))
+	try:
+		who=await bot.get_user_info(user)
+		await bot.unban(con.message.server,who)
+		await bot.say("User has been unbanned")
+	except:
+		await bot.say("Something went wrong")
+		await bot.say("Usage: `{}unban [member id]`".format(ctx.prefix))
     
 @bot.command(pass_context=True)
 @commands.check(user_is_me)
