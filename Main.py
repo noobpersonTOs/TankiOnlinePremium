@@ -683,7 +683,7 @@ async def info(ctx):
 @commands.has_permissions(kick_members=True, administrator=True)
 async def _mute(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
-		await bot.say("please provide a member")
+		await bot.say("Usage: `{}mute [member] [reason]`".format(ctx.prefix))
 		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
@@ -710,7 +710,7 @@ async def mute_error(error, ctx):
 @commands.has_permissions(kick_members=True, administrator=True)
 async def _unmute(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
-		await bot.say("please provide a member")
+		await bot.say("Usage: `{}unmute [member] [reason]`".format(ctx.prefix))
 		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
@@ -737,7 +737,7 @@ async def unmute_error(error, ctx):
 @commands.has_permissions(kick_members=True)
 async def _kick(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
-		await bot.say("please provide a member")
+		await bot.say('Usage: `{}kick [member] [reason]`'.format(ctx.prefix))
 		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
@@ -763,7 +763,7 @@ async def kick_error(error, ctx):
 @commands.has_permissions(ban_members=True)
 async def _ban(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
-		await bot.say("please provide a member")
+		await bot.say('Usage: `{}ban [member] [reason]`'.format(ctx.prefix))
 		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
@@ -789,7 +789,7 @@ async def ban_error(error, ctx):
 @commands.has_permissions(kick_members=True)
 async def _warn(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
-		await bot.say("please provide a member")
+		await bot.say('Usage: `{}warn [member] [reason]`'.format(ctx.prefix))
 		return False
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
@@ -822,13 +822,13 @@ async def unban(con,user:int):
         await bot.say("User has been unbanned")
     except:
         await bot.say("Something went wrong")
+	await bot.say("Usage: `{}unban [member id]`".format(ctx.prefix))
     
 @bot.command(pass_context=True)
 @commands.check(user_is_me)
 async def msg(ctx, user: discord.Member, *, msg):
 	await bot.send_message(user, msg)
 	await bot.delete_message(ctx.message)
-	print(f"{ctx.message.author.name} from {ctx.message.server} used d!msg command")
     
 @bot.command(name="promote", pass_context=True)
 @commands.has_permissions(administrator=True)
