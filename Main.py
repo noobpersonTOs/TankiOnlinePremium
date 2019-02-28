@@ -420,7 +420,7 @@ async def ratings(ctx, user: str):
 				embed.add_field(name="K/D", value="{0:.2f}".format(kills/deaths), inline=False)
 				await bot.say(embed=embed)
 				channel = bot.get_channel('525109045221261312')
-				embed = discord.Embed(title=f"User: {ctx.message.author.name} have used ratings command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+				embed = discord.Embed(title=f"User: {ctx.message.author} have used ratings command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 				await bot.send_message(channel, embed=embed)
 			except:
 				await bot.say("Account does not exist.")
@@ -428,7 +428,7 @@ async def ratings(ctx, user: str):
 @bot.command(pass_context=True)
 async def noobs(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
-    embed = discord.Embed(title=f"User: {ctx.message.author.name}", description=f"Report: {reportmsg}", color=0xff9393)        
+    embed = discord.Embed(title=f"User: {ctx.message.author}", description=f"Report: {reportmsg}", color=0xff9393)        
     await bot.send_message(channel, embed=embed)
     embed = discord.Embed(title="Your report has been submitted and we will get back to you as soon as possible", description=f"Case details: {reportmsg} ", color=0xff9393)       
     await bot.say(embed=embed)
@@ -436,7 +436,7 @@ async def noobs(ctx, *, reportmsg: str):
 @bot.command(pass_context=True)
 async def noobs2(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
-    msg = embed = discord.Embed(title=f"User: {ctx.message.author.name}", description=f"Suggestion: {reportmsg}", color=0xff9393)
+    msg = embed = discord.Embed(title=f"User: {ctx.message.author}", description=f"Suggestion: {reportmsg}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
     embed = discord.Embed(title="Your suggestion has been submitted and we will get back to you as soon as possible", description=f"Suggestion details: {reportmsg} ", color=0xff9393)
     await bot.say(embed=embed)
@@ -553,7 +553,7 @@ async def coinflip(ctx):
         join.set_footer(text='Requested by: ' + user.name)
         await bot.send_message(ctx.message.channel, embed=join)
         channel = bot.get_channel('525109045221261312')
-        embed = discord.Embed(title=f"User: {ctx.message.author.name} have used coinflip command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+        embed = discord.Embed(title=f"User: {ctx.message.author} have used coinflip command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
         await bot.send_message(channel, embed=embed)
 		
 @bot.command(name='eval', pass_context=True)
@@ -605,25 +605,25 @@ async def delrank(ctx, *, role_name):
 @bot.command(pass_context=True)
 async def bug(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
-    msg = embed = discord.Embed(title=f"User: {ctx.message.author.name} {ctx.message.author.id}", description=f"Bug reports: {reportmsg}", color=0xFFFF)
+    msg = embed = discord.Embed(title=f"User: {ctx.message.author} {ctx.message.author.id}", description=f"Bug reports: {reportmsg}", color=0xFFFF)
     await bot.send_message(channel, embed=embed)
     text = embed = discord.Embed(title="Your bug reports has been submitted", description=f"{ctx.message.author.name}'s message: {reportmsg} ", color=0xFFFF)
     await bot.delete_message(ctx.message)
     await bot.say(embed=embed)
     channel = bot.get_channel('525109045221261312')
-    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used bug command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    embed = discord.Embed(title=f"User: {ctx.message.author} have used bug command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
     
 @bot.command(pass_context=True)
 async def idea(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
-    msg = embed = discord.Embed(title=f"User: {ctx.message.author.name} {ctx.message.author.id}", description=f"Idea: {reportmsg}", color=0xFFFF)
+    msg = embed = discord.Embed(title=f"User: {ctx.message.author}", description=f"Idea: {reportmsg}", color=0xFFFF)
     await bot.send_message(channel, embed=embed)
     embed = discord.Embed(title="Your idea has been submitted", description=f"{ctx.message.author.name}'s message: {reportmsg} ", color=0xFFFF)
     await bot.delete_message(ctx.message)
     await bot.say(embed=embed)
     channel = bot.get_channel('525109045221261312')
-    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used idea command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    embed = discord.Embed(title=f"User: {ctx.message.author} have used idea command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
 		
 @bot.command(pass_context=True, no_pm=True)
@@ -676,7 +676,7 @@ async def info(ctx):
 	embed.set_footer(text=" | {}".format(bot.user.name), icon_url="https://cdn.discordapp.com/avatars/409253229491126285/b6a655353cf088ea82f91c281cb97e86.png?size=1024")
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used info command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used info command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 		
 @bot.command(name="mute", pass_context=True)
@@ -875,7 +875,7 @@ async def help(ctx):
 	embed.set_footer(text="Requested by: " + author.name)
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used help command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used help command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
@@ -888,7 +888,7 @@ async def moderations(ctx):
 	embed.add_field(name="unban", value="`d!unban user.id | for example: d!unban 277983178914922497`")
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used moderations command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used moderations command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 
 @bot.command(aliases=['ud'])
@@ -904,7 +904,7 @@ async def urban(*msg):
 	embed.add_field(name="Examples:", value=response['list'][0]["example"])
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used urban command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used urban command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
@@ -915,17 +915,17 @@ async def maths(ctx):
 	embed.add_field(name="math", value="d!math divide [amount] [amount]")
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used maths command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used maths command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
-async def rules(ctx):
+async def ruless(ctx):
 	embed = discord.Embed(title="1. Please be respectful to everyone in here", description="Do not use any insult/profanity", color=0xFFFF)
 	embed.add_field(name="2. Do not spam in any channel", value="you can spam in #bot_spam_1 and #bot_spam_2 only")
 	await bot.delete_message(ctx.message)
 	await bot.say(embed=embed)
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used rules command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used rules command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True, no_pm=True)
@@ -936,7 +936,7 @@ async def membercount(ctx):
 	users = members - bots
 	await bot.send_message(ctx.message.channel, embed=discord.Embed(title="Membercount", description="{} there is {} users and {} bots with a total of {} members in this server.".format(ctx.message.author.mention, len(users), len(bots), len(ctx.message.server.members)), colour=0X008CFF))
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used membercount command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used membercount command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(name="setgame", pass_context=True, aliases=['game', 'presence'])
@@ -977,7 +977,7 @@ async def _say(ctx, *, msg = None):
     else: await bot.say(msg)
     return
     channel = bot.get_channel('525109045221261312')
-    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used say command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    embed = discord.Embed(title=f"User: {ctx.message.author} have used say command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
     
 @_say.error
@@ -998,7 +998,7 @@ async def _clean(ctx, amount=100):
     await asyncio.sleep(5)
     await bot.delete_message(msg)
     channel = bot.get_channel('525109045221261312')
-    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used clean command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    embed = discord.Embed(title=f"User: {ctx.message.author} have used clean command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
     
 @_clean.error
@@ -1016,7 +1016,7 @@ async def _purge(ctx, amount=100):
         messages.append(message)
     await bot.delete_messages(messages)
     channel = bot.get_channel('525109045221261312')
-    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used purge command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    embed = discord.Embed(title=f"User: {ctx.message.author} have used purge command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
     
 @_purge.error
@@ -1048,7 +1048,7 @@ async def _addrole(ctx, user: discord.Member = None, *, name = None):
     await asyncio.sleep(1)
     await bot.delete_message(text)
     channel = bot.get_channel('525109045221261312')
-    embed = discord.Embed(title=f"User: {ctx.message.author.name} have used addrole command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    embed = discord.Embed(title=f"User: {ctx.message.author} have used addrole command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
     
 @_addrole.error
@@ -1068,7 +1068,7 @@ async def _removerole(ctx, user: discord.Member = None, *, name = None):
 	await asyncio.sleep(1)
 	await bot.delete_message(text)
 	channel = bot.get_channel('525109045221261312')
-	embed = discord.Embed(title=f"User: {ctx.message.author.name} have used removerole command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used removerole command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
 	
 @_removerole.error
