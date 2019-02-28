@@ -970,7 +970,6 @@ async def status_error(error, ctx):
 		await bot.send_message(ctx.message.channel, text)
 
 @bot.command(name="say", pass_context=True)
-@commands.has_permissions(administrator=True)
 async def _say(ctx, *, msg = None):
     await bot.delete_message(ctx.message)
 
