@@ -685,6 +685,7 @@ async def vote(ctx):
 	embed = discord.Embed(description=" ", color=0xFFFF)
 	embed.add_field(name="Upvote me", value=f"[Vote me](https://discordbots.org/bot/409253229491126285/vote)")
 	embed.set_footer(text="Requested by " + ctx.message.author)
+	await bot.say(embed=embed)
 		
 @bot.command(name="mute", pass_context=True)
 @commands.has_permissions(kick_members=True, administrator=True)
