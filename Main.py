@@ -254,9 +254,9 @@ async def _open_container(ctx):
 async def open_container_error(error, ctx):
 	if isinstance(error, commands.CommandOnCooldown):
 		msg = ':exclamation: ***This command is on cooldown, please try again in {:.2f}s*** :exclamation:'.format(error.retry_after)
-		await bot.send_message(ctx.message.channel, msg)
+		msgs = await bot.send_message(ctx.message.channel, msg)
 		await asyncio.sleep(5)
-		await bot.delete_message(ctx.message.channel, msg)
+		await bot.delete_message(ctx.message.channel, msgs)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
@@ -678,6 +678,13 @@ async def info(ctx):
 	channel = bot.get_channel('525109045221261312')
 	embed = discord.Embed(title=f"User: {ctx.message.author} have used info command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True)
+async def vote(ctx):
+	author = ctx.message.author
+	embed = discord.Embed(description=" ", color=0xFFFF)
+	embed.add_field(name="Upvote me", value=f"[Vote me](https://discordbots.org/bot/409253229491126285/vote)")
+	embed.set_footer(text="Requested by " + ctx.message.author)
 		
 @bot.command(name="mute", pass_context=True)
 @commands.has_permissions(kick_members=True, administrator=True)
