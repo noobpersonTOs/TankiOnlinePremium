@@ -885,7 +885,7 @@ async def help(ctx):
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
-async def commands(ctx):
+async def help1(ctx):
     author = ctx.message.author
     embed = discord.Embed(description=" ")
     embed.add_field(name="Help is Here!", value="***Example:*** `d!ratings noobperson`", inline=True)
