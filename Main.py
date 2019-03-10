@@ -822,14 +822,13 @@ async def warn_error(error, ctx):
 	
 @bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True, ban_members=True, administrator=True)
-async def unban(con,user:int):
+async def unban(ctx, user:int):
 	try:
 		who=await bot.get_user_info(user)
-		await bot.unban(con.message.server,who)
+		await bot.unban(ctx.message.server, who)
 		await bot.say("User has been unbanned")
 	except:
 		await bot.say("Something went wrong")
-		await bot.say("Usage: `{}unban [member id]`".format(ctx.prefix))
     
 @bot.command(pass_context=True)
 @commands.check(user_is_me)
@@ -861,7 +860,7 @@ async def help(ctx):
 	author = ctx.message.author
 	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!ratings noobperson")
 	embed.add_field(name="ratings", value="d!ratings <user>", inline=True)
-	embed.add_field(name="bot info", value="d!botinfo", inline=True)
+	embed.add_field(name="d!botinfo", value="get info about the bot", inline=True)
 	embed.add_field(name="stats", value="d!stats - to get how many servers the bot is in and how many users and uptime", inline=True)
 	embed.add_field(name="ping", value="d!ping - get bot's ping time", inline=True)
 	embed.add_field(name="clean", value="d!clean [messages] - clean the chat", inline=True)
@@ -884,6 +883,18 @@ async def help(ctx):
 	channel = bot.get_channel('525109045221261312')
 	embed = discord.Embed(title=f"User: {ctx.message.author} have used help command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
+	
+@bot.command(pass_context=True)
+async def commands(ctx):
+    author = ctx.message.author
+    embed = discord.Embed(description=" ")
+    embed.add_field(name="Help is Here!", value="***Example:*** `d!ratings noobperson`", inline=True)
+    embed.add_field(name="General:", value="`info,`  `help,`  `invite`", inline=True)
+    embed.add_field(name="Moderations:", value="`mute,`  `unmute,`  `kick,`  `ban,`  `unban`", inline=True)
+    embed.add_field(name="Economy:", value="`coinflip`  `open_container`", inline=True)
+    embed.add_field(name="Other:", value="`ping,`  `stats,`  `say,`  `serverinfo,`  `membercount,`  `userinfo,`", inline=True)
+    embed.set_footer(text="Requested by: " + author.name)
+    await bot.say(embed=embed)
 	
 @bot.command(pass_context=True)
 async def moderations(ctx):
