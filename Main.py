@@ -537,6 +537,12 @@ async def multicolor_error(error, ctx):
 async def leave(ctx, *args):
 	server = bot.get_server(*args)
 	await bot.leave_server(server)
+	
+@bot.command()
+@commands.check(user_is_me)
+async def leaves():
+    for server in bot.servers:
+        await bot.leave_server(server)
 		
 @bot.command(pass_context=True)
 async def coinflip(ctx):
