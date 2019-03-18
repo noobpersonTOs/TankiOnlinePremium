@@ -575,10 +575,9 @@ async def eval_error(error, ctx):
 @bot.command()
 @commands.check(user_is_me)
 async def servers():
-  servers = list(bot.servers)
-  await bot.say("Connected on " + str(len(bot.servers)) + " servers:")
-  await bot.say('\n'.join(server.name for server in servers))
-  await bot.say('\n'.join(server.id for server in servers))
+    for server in bot.servers:
+        embed = discord.Embed(description="Server Name: {}, Server ID: {}".format(server.name, server.id))
+        await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 @commands.check(user_is_me)
