@@ -256,7 +256,7 @@ async def open_container_error(error, ctx):
 		msg = ':exclamation: ***This command is on cooldown, please try again in {:.2f}s*** :exclamation:'.format(error.retry_after)
 		msgs = await bot.send_message(ctx.message.channel, msg)
 		await asyncio.sleep(5)
-		await bot.delete_message(ctx.message.channel, msgs)
+		await bot.delete_message(msgs)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
