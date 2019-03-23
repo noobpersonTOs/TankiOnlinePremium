@@ -338,8 +338,8 @@ async def botinfo(ctx):
 	embed.add_field(name="Prefix", value="d!")
 	await bot.say(embed=embed)
 	
-@bot.command()
-async def testz():
+@bot.command(pass_context=True)
+async def testz(ctx):
 	embed = discord.Embed(description=" ")
 	embed.add_field(name="test", value="test1")
 	msg = await bot.say(embed=embed)
