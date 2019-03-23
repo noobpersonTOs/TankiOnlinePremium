@@ -338,6 +338,11 @@ async def botinfo(ctx):
 	embed.add_field(name="Prefix", value="d!")
 	await bot.say(embed=embed)
 	
+@bot.command()
+async def testz():
+	await bot.add_reaction(emoji="◀️")
+	await bot.add_reaction(emoji="▶️")
+	
 @bot.command(pass_context = True)
 @commands.has_permissions(administrator=True) 
 async def bans(ctx):
