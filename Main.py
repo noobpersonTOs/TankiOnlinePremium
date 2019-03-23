@@ -343,7 +343,8 @@ async def testz(ctx):
 	embed = discord.Embed(description=" ")
 	embed.add_field(name="test", value="test1")
 	msg = await bot.say(embed=embed)
-	emoji = get(bot.get_all_emojis(), name='◀️', '▶️')
+	emoji = get(bot.get_all_emojis(), name='◀️')
+	emoji = get(bot.get_all_emojis(), name='▶️')
 	await bot.add_reaction(msg, emoji)
 	
 @bot.command(pass_context = True)
