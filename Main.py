@@ -340,8 +340,11 @@ async def botinfo(ctx):
 	
 @bot.command()
 async def testz():
-	await bot.add_reaction(emoji="◀️")
-	await bot.add_reaction(emoji="▶️")
+	embed = discord.Embed(description=" ")
+	embed.add_field(name="test", value="test1")
+	msg = await bot.say(embed=embed)
+	await bot.add_reaction(msg, emoji="◀️")
+	await bot.add_reaction(msg, emoji="▶️")
 	
 @bot.command(pass_context = True)
 @commands.has_permissions(administrator=True) 
