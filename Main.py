@@ -884,7 +884,7 @@ async def help(ctx):
 	embed.add_field(name="d!membercount", value="to see how many members are in the server", inline=True)
 	embed.add_field(name="addrole", value="d!addrole @user <role name>", inline=True)
 	embed.add_field(name="removerole", value="d!removerole @user <role name>", inline=True)
-	embed.add_field(name="d!open_container", value="opening containers (still adding more items)", inline=True)
+	embed.add_field(name="d!c open", value="opening containers (still adding more items)", inline=True)
 	embed.add_field(name="d!coinflip", value="50 50 chance of getting tails and heads", inline=True)
 	embed.add_field(name="moderations", value="d!moderations - to get list of moderations", inline=True)
 	embed.add_field(name="math", value="d!maths - to get list of math", inline=True)
