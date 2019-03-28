@@ -242,7 +242,7 @@ async def square(number):
     squared_value = int(number) * int(number)
     await bot.say(str(number) + " squared is " + str(squared_value))
 	
-@bot.command(name="open_container", pass_context=True)
+@bot.command(name="open_container", pass_context=True, aliases="c open")
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def _open_container(ctx):
 	embed = discord.Embed(title="Tanki Online", url="https://discordbots.org/bot/409253229491126285", description=" ", color=0x42d9f4)
