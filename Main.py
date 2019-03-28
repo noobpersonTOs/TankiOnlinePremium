@@ -250,7 +250,7 @@ async def _open_container(ctx):
 @_open_container.error
 async def open_container_error(error, ctx):
 	if isinstance(error, commands.CommandOnCooldown):
-		msg = ':exclamation: ***This command is on cooldown, please try again in {:.2f}s*** :exclamation:'.format(error.retry_after)
+		msg = ':exclamation: ***This command is on cooldown, please try again in {:.2f} seconds*** :exclamation:'.format(error.retry_after)
 		msgs = await bot.send_message(ctx.message.channel, msg)
 		await asyncio.sleep(5)
 		await bot.delete_message(msgs)
