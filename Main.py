@@ -905,7 +905,7 @@ async def help1(ctx):
     embed.add_field(name="Help is Here!", value="***Example:*** `d!ratings noobperson`", inline=True)
     embed.add_field(name="General:", value="`info,`  `help,`  `invite`", inline=True)
     embed.add_field(name="Moderations:", value="`mute,`  `unmute,`  `kick,`  `ban,`  `unban`", inline=True)
-    embed.add_field(name="Economy:", value="`coinflip`  `open_container`", inline=True)
+    embed.add_field(name="Economy:", value="`coinflip`  `container open`", inline=True)
     embed.add_field(name="Other:", value="`ping,`  `stats,`  `say,`  `serverinfo,`  `membercount,`  `userinfo,`", inline=True)
     embed.set_footer(text="Requested by: " + author.name)
     await bot.say(embed=embed)
