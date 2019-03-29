@@ -250,7 +250,7 @@ async def _open_container(ctx):
 @_open_container.error
 async def open_container_error(error, ctx):
 	if isinstance(error, commands.CommandOnCooldown):
-		msg = ':exclamation: ***This command is on cooldown, please try again in {:.2f} seconds*** :exclamation:'.format(error.retry_after)
+		msg = ':exclamation: ***This command is on cooldown, please try again in {:.hf} hours {:.mf} minutes {:.2f} seconds*** :exclamation:'.format(error.retry_after)
 		msgs = await bot.send_message(ctx.message.channel, msg)
 		await asyncio.sleep(5)
 		await bot.delete_message(msgs)
@@ -334,15 +334,6 @@ async def botinfo(ctx):
 	embed.add_field(name="Invite link", value="[Click Here!](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=2146958839&scope=bot)")
 	embed.add_field(name="Prefix", value="d!")
 	await bot.say(embed=embed)
-	
-@bot.command(pass_context=True)
-async def testz(ctx):
-	embed = discord.Embed(description=" ")
-	embed.add_field(name="test", value="test1")
-	msg = await bot.say(embed=embed)
-	emoji = get(bot.get_all_emojis(), name='◀️')
-	emoji = get(bot.get_all_emojis(), name='▶️')
-	await bot.add_reaction(msg, emoji)
 	
 @bot.command(pass_context = True)
 @commands.has_permissions(administrator=True) 
