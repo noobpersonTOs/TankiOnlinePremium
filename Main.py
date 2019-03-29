@@ -256,6 +256,7 @@ async def open_container_error(error, ctx):
 		await bot.delete_message(msgs)
 		
 def cooldown(rate, per_sec=0, per_min=0, per_hour=0, type=commands.BucketType.default):
+	await bot.send_message(rate, per_sec + 60 * per_min + 3600 * per_hour, type)
 	return commands.cooldown(rate, per_sec + 60 * per_min + 3600 * per_hour, type)
 
 @bot.command(pass_context=True)
