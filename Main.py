@@ -254,16 +254,6 @@ async def open_container_error(error, ctx):
 		msgs = await bot.send_message(ctx.message.channel, msg)
 		await asyncio.sleep(5)
 		await bot.delete_message(msgs)
-		
-def cooldown(rate, per_sec=0, per_min=0, per_hour=0, type=commands.BucketType.default):
-	await bot.send_message(rate, per_sec + 60 * per_min + 3600 * per_hour, type)
-	return commands.cooldown(rate, per_sec + 60 * per_min + 3600 * per_hour, type)
-
-@bot.command(pass_context=True)
-@cooldown(1, per_min=5, per_hour=1, type=commands.BucketType.user)
-async def testing(ctx):
-	msg = "Pong {0.author.mention}".format(ctx.message)
-	await bot.say(msg)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
