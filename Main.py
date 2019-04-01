@@ -242,7 +242,7 @@ cont = ["**|** You found a common item: **3,500 Crystals**",
 	"**|** You found an exotic item: **Ricochet XT",
 	"**|** You found an exotic item: **Twins XT**",
 	"**|** You found an exotic item: **Freeze XT**",
-	"**|** You found an exotic item: **Striker XT**
+	"**|** You found an exotic item: **Striker XT**",
 	"**|** You found an exotic item: **Mammonth XT**"]
 
 @bot.event
