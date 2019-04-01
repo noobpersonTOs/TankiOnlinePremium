@@ -230,7 +230,20 @@ cont = ["**|** You found a common item: **3,500 Crystals**",
 	"**|** You found an exotic item: **Railgun XT**",
 	"**|** You found an exotic item: **Thunder XT**",
 	"**|** You found an exotic item: **Shaft XT**",
-	"**|** You found an exotic item: **Wasp XT**"]
+	"**|** You found an exotic item: **Wasp XT**",
+	"**|** You found an exotic item: **1,000,000 crystals**",
+	"**|** You found an exotic item: **Firebird XT**",
+	"**|** You found an exotic item: **Isida XT**",
+	"**|** You found an exotic item: **Hammer XT**",
+	"**|** You found an exotic item: **Hornet XT**",
+	"**|** You found an exotic item: **Viking XT**",
+	"**|** You found an exotic item: **Titan XT**",
+	"**|** You found an exotic item: **Hunter XT**",
+	"**|** You found an exotic item: **Ricochet XT",
+	"**|** You found an exotic item: **Twins XT**",
+	"**|** You found an exotic item: **Freeze XT**",
+	"**|** You found an exotic item: **Striker XT**
+	"**|** You found an exotic item: **Mammonth XT**"]
 
 @bot.event
 async def on_message(message):
