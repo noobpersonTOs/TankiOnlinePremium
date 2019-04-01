@@ -21,7 +21,7 @@ async def on_ready():
 	print(bot.user.name)
 	print(bot.user.id)
 
-cont = ["**|*** You found a common item: **3,500 Crystals**",
+cont = ["**|** You found a common item: **3,500 Crystals**",
         "**|** You found a common item: **125 Double Armor**",
         "**|** You found a common item: **125 Double Damage**",
         "**|** You found a common item: **125 Speed Boost**",
@@ -178,7 +178,7 @@ cont = ["**|*** You found a common item: **3,500 Crystals**",
         "**|** You found an uncommon item: **5 Gold Boxes**",
         "**|** You found an uncommon item: **10,000 Crystals**",
         "**|** You found an uncommon item: **125 Repair Kits**",
-        "**|** You found an uncommmon item: **100 0f all Supplies**",
+        "**|** You found an uncommon item: **100 0f all Supplies**",
         "**|** You found an uncommon item: **3 days of Premium Account**",
         "**|** You found an uncommon item: **5 Gold Boxes**",
         "**|** You found an uncommon item: **10,000 Crystals**",
