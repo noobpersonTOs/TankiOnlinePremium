@@ -226,7 +226,11 @@ cont = ["**|** You found a common item: **3,500 Crystals**",
         "**|** You found a legendary item: **Holiday Lights**",
         "**|** You found a legendary item: **Vertigo**",
         "**|** You found a legendary item: **Matrix**",
-        "**|** You found a legendary item: **Mosaic**"]
+        "**|** You found a legendary item: **Mosaic**",
+	"**|** You found an exotic item: **Railgun XT**",
+	"**|** You found an exotic item: **Thunder XT**",
+	"**|** You found an exotic item: **Shaft XT**",
+	"**|** You found an exotic item: **Wasp XT**"]
 
 @bot.event
 async def on_message(message):
