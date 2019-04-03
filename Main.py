@@ -246,6 +246,24 @@ cont = ["**|** You found a common item: **3,500 Crystals**",
 	"**|** You found an exotic item: **Mammonth <:XT:560981632660537358>**"]
 
 @bot.event
+async def on_command_error(error,con):
+    data={
+        "Author Name":con.message.author.name,
+        "Author ID": con.message.author.id,
+        "Channel Name":con.message.channel.name,
+        "Channel ID": con.message.channel.id,
+        "Server Name":con.message.server.name,
+        "Server ID": con.message.server.id,
+        "Command used": str(error.args),
+        "Message": con.message.content
+    }
+    emb=discord.Embed(title="Command Error")
+    for i in data:
+        emb.add_field(name=i,value=data[i])
+    who=discord.utils.get(bot.get_all_members(),id='277983178914922497')
+    await bot.send_message(who,embed=emb)
+
+@bot.event
 async def on_message(message):
 	if message.content.upper().startswith("NOOB DYNO"):
 		await bot.send_message(message.channel, "Don't insult my friend Dyno! :angry:                                                                                                                         you are noob {}!".format(message.author.mention))
