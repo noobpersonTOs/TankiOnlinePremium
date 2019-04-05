@@ -667,12 +667,17 @@ async def userinfos(ctx, user: discord.Member = None):
 	embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
 	embed.add_field(name="ID:", value=user.id)
 	embed.add_field(name="Guild name:", value=user.display_name)
-	embed.set_thumbnail(url="[Avatar URL](https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024)".format(user))
 	embed.add_field(name="Created at:", value=user.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
 	embed.add_field(name="Joined at:", value=user.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline=False)
 	embed.add_field(name=f"Roles ({len(roles)})", value=" ".join([role.mention for role in roles]))
 	embed.add_field(name="Top role:", value=user.top_role.mention)
 	await bot.send_message(ctx.message.channel, embed=embed)
+	
+@bot.command(pass_context=True)
+async def teta(ctx):
+	embed = discord.Embed(description=" ")
+	embed.add_field(name="Testing", value="TEST1")
+	embed.add_field(name="Message created at", value=ctx.message.created_At.strftime("%a, %#d %b %Y, %I:%M %p"))
 
 @bot.command(pass_context=True)
 async def info(ctx):
