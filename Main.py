@@ -672,13 +672,6 @@ async def userinfos(ctx, user: discord.Member = None):
 	embed.add_field(name=f"Roles ({len(roles)})", value=" ".join([role.mention for role in roles]))
 	embed.add_field(name="Top role:", value=user.top_role.mention)
 	await bot.send_message(ctx.message.channel, embed=embed)
-	
-@bot.command(pass_context=True)
-async def teta(ctx):
-	embed = discord.Embed(description=" ")
-	embed.add_field(name="Testing", value="TEST1")
-	embed.add_field(name="Message created at", value=ctx.message.createdAt.strftime("%a, %#d %b %Y, %I:%M %p"))
-	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 async def info(ctx):
