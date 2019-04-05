@@ -550,12 +550,6 @@ async def multicolor_error(error, ctx):
 async def leave(ctx, *args):
 	server = bot.get_server(*args)
 	await bot.leave_server(server)
-	
-@bot.command()
-@commands.check(user_is_me)
-async def leaves():
-    for server in bot.servers:
-        await bot.leave_server(server)
 		
 @bot.command(pass_context=True)
 async def coinflip(ctx):
@@ -656,6 +650,7 @@ async def userinfo(ctx, user: discord.Member = None):
 	embed.add_field(name="Highest Role:", value=user.top_role.mention, inline=True)
 	embed.add_field(name="Account Created:", value=user.created_at.strftime("%A, %B %d %Y %H:%M:%S %p"))
 	embed.add_field(name="Joined At:", value=user.joined_at.strftime("%A, %B %d %Y %H:%M:%S %p"))
+	embed.add_field(name="Avatar url:", value=f"[Avatar URL](https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
 	embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
 	embed.set_footer(text=" | {}".format(user.name), icon_url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
 	await bot.say(embed=embed)
