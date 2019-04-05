@@ -678,6 +678,7 @@ async def teta(ctx):
 	embed = discord.Embed(description=" ")
 	embed.add_field(name="Testing", value="TEST1")
 	embed.add_field(name="Message created at", value=ctx.message.created_At.strftime("%a, %#d %b %Y, %I:%M %p"))
+	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 async def info(ctx):
