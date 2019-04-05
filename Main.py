@@ -677,7 +677,7 @@ async def userinfos(ctx, user: discord.Member = None):
 async def teta(ctx):
 	embed = discord.Embed(description=" ")
 	embed.add_field(name="Testing", value="TEST1")
-	embed.add_field(name="Message created at", value=ctx.message.created_At.strftime("%a, %#d %b %Y, %I:%M %p"))
+	embed.add_field(name="Message created at", value=ctx.message.createdAt.strftime("%a, %#d %b %Y, %I:%M %p"))
 	await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
