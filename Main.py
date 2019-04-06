@@ -617,7 +617,7 @@ async def bug(ctx, *, reportmsg: str):
 	embed = discord.Embed(title=f"User: {ctx.message.author} have used bug command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 	await bot.send_message(channel, embed=embed)
     
-@bot.command(pass_context=True, aliases="suggest")
+@bot.command(pass_context=True)
 async def suggestion(ctx, *, reportmsg: str):
 	channel = bot.get_channel('503634621699850250')
 	msg = embed = discord.Embed(title=f"User: {ctx.message.author}", description=f"Idea: {reportmsg}", color=0xFFFF)
