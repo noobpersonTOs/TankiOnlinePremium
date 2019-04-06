@@ -336,14 +336,6 @@ async def renamechannel(ctx, channel: discord.Channel, *, new_name):
     await bot.edit_channel(name=new_name)
 	
 @bot.command(pass_context=True)
-async def staffrequest(ctx, *, msg):
-	owner = ctx.message.server.owner
-	author = ctx.message.author
-	await bot.send_message(owner, msg)
-	await bot.send_message(owner, " Requested by " + author.name)
-	await bot.delete_message(ctx.message)
-	
-@bot.command(pass_context=True)
 async def botinfo(ctx):
 	embed=discord.Embed(title="Bot name", description="Tanki Online", color=0xFFFF00)
 	embed.add_field(name="Creator", value="noobperson#2436")
@@ -439,7 +431,7 @@ async def ratings(ctx, user: str):
 				await bot.say("Account does not exist.")
     			
 @bot.command(pass_context=True)
-async def noobs(ctx, *, reportmsg: str):
+async def nooobs(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
     embed = discord.Embed(title=f"User: {ctx.message.author}", description=f"Report: {reportmsg}", color=0xff9393)        
     await bot.send_message(channel, embed=embed)
@@ -447,7 +439,7 @@ async def noobs(ctx, *, reportmsg: str):
     await bot.say(embed=embed)
     
 @bot.command(pass_context=True)
-async def noobs2(ctx, *, reportmsg: str):
+async def nooobs2(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
     msg = embed = discord.Embed(title=f"User: {ctx.message.author}", description=f"Suggestion: {reportmsg}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
@@ -500,7 +492,6 @@ async def setup(ctx):
     await bot.create_role(author.server, name="G.O.H")
     await bot.create_role(author.server, name="Moderator", permissions=mod_perms)
     await bot.create_role(author.server, name="Muted")
-    
     await bot.create_role(author.server, name="Friend of Owner")
     await bot.create_role(author.server, name="Verified")
     everyone_perms = discord.PermissionOverwrite(send_messages=False, read_messages=True)
@@ -626,16 +617,16 @@ async def bug(ctx, *, reportmsg: str):
     embed = discord.Embed(title=f"User: {ctx.message.author} have used bug command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
     
-@bot.command(pass_context=True)
-async def idea(ctx, *, reportmsg: str):
+@bot.command(pass_context=True, aliases="suggest")
+async def suggestion(ctx, *, reportmsg: str):
     channel = bot.get_channel('503634621699850250')
     msg = embed = discord.Embed(title=f"User: {ctx.message.author}", description=f"Idea: {reportmsg}", color=0xFFFF)
     await bot.send_message(channel, embed=embed)
-    embed = discord.Embed(title="Your idea has been submitted", description=f"{ctx.message.author.name}'s message: {reportmsg} ", color=0xFFFF)
+    embed = discord.Embed(title="Your suggestion has been submitted", description=f"{ctx.message.author.name}'s message: {reportmsg} ", color=0xFFFF)
     await bot.delete_message(ctx.message)
     await bot.say(embed=embed)
     channel = bot.get_channel('525109045221261312')
-    embed = discord.Embed(title=f"User: {ctx.message.author} have used idea command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+    embed = discord.Embed(title=f"User: {ctx.message.author} have used suggestion command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
     await bot.send_message(channel, embed=embed)
 		
 @bot.command(pass_context=True, no_pm=True)
@@ -647,7 +638,7 @@ async def userinfo(ctx, user: discord.Member = None):
 	embed.add_field(name="ID:", value=user.id, inline=True)
 	embed.add_field(name="Status:", value=user.status, inline=True)
 	embed.add_field(name='Playing Status:', value=user.game, inline=True)
-	embed.add_field(name="Highest Role:", value=user.top_role.mention, inline=True)
+	embed.add_field(name="Highest Role:", value=user.top_role, inline=True)
 	embed.add_field(name="Account Created:", value=user.created_at.strftime("%A, %B %d %Y %H:%M:%S %p"))
 	embed.add_field(name="Joined At:", value=user.joined_at.strftime("%A, %B %d %Y %H:%M:%S %p"))
 	embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/{0.id}/{0.avatar}.png?size=1024".format(user))
@@ -888,7 +879,7 @@ async def help(ctx):
 	embed.add_field(name="math", value="d!maths - to get list of math", inline=True)
 	embed.add_field(name="userinfo", value="d!userinfo @user", inline=True)
 	embed.add_field(name="bug", value="d!bug <your message here>", inline=True)
-	embed.add_field(name="idea", value="d!idea <your message here>", inline=True)
+	embed.add_field(name="suggestion", value="d!suggestion <your message here>", inline=True)
 	embed.set_thumbnail(url=server.icon_url)
 	embed.set_footer(text="Requested by: " + author.name)
 	await bot.say(embed=embed)
@@ -949,7 +940,7 @@ async def maths(ctx):
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
-async def ruless(ctx):
+async def rulesschannel(ctx):
 	embed = discord.Embed(title="1. Please be respectful to everyone in here", description="Do not use any insult/profanity", color=0xFFFF)
 	embed.add_field(name="2. Do not spam in any channel", value="you can spam in #bot_spam_1 and #bot_spam_2 only")
 	await bot.delete_message(ctx.message)
