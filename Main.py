@@ -365,8 +365,8 @@ async def stats():
 @bot.command()
 async def invite():
 	embed = discord.Embed(description=" ", color=0xFFFF)
-	embed.add_field(name="Bot invite", value=f"[Bot invite](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=469854214&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D409253229491126285%26permissions%3D2146958839%26scope%3Dbot&scope=bot)")
-	embed.add_field(name="Support server", value=f"[https://discord.gg/bweznkF](https://discord.gg/bweznkF)")
+	embed.add_field(name="Bot invite", value=f"[Link](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=469854214&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D409253229491126285%26permissions%3D2146958839%26scope%3Dbot&scope=bot)")
+	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/bweznkF)")
 	await bot.say(embed=embed)
 			
 @bot.command(pass_context=True)
@@ -858,7 +858,7 @@ async def promote_error(error, ctx):
 		await bot.send_message(ctx.message.channel, text)
 
 @bot.command(pass_context=True)
-async def help(ctx):
+async def help1(ctx):
 	server = ctx.message.server
 	author = ctx.message.author
 	embed = discord.Embed(title="Help is here!", description="Here are the commands: Example d!ratings noobperson")
@@ -888,14 +888,14 @@ async def help(ctx):
 	await bot.send_message(channel, embed=embed)
 	
 @bot.command(pass_context=True)
-async def help1(ctx):
+async def help(ctx):
     author = ctx.message.author
     embed = discord.Embed(description=" ")
     embed.add_field(name="Help is Here!", value="***Example:*** `d!ratings noobperson`", inline=True)
     embed.add_field(name="General:", value="`info,`  `help,`  `invite`", inline=True)
     embed.add_field(name="Moderations:", value="`mute,`  `unmute,`  `kick,`  `ban,`  `unban`", inline=True)
-    embed.add_field(name="Economy:", value="`coinflip`  `container open`", inline=True)
-    embed.add_field(name="Other:", value="`ping,`  `stats,`  `say,`  `serverinfo,`  `membercount,`  `userinfo,`", inline=True)
+    embed.add_field(name="Economy:", value="`coinflip`  `c open`", inline=True)
+    embed.add_field(name="Other:", value="`ping,`  `stats,`  `say,`  `serverinfo,`  `membercount,`  `userinfo,` `botinfo`", inline=True)
     embed.set_footer(text="Requested by: " + author.name)
     await bot.say(embed=embed)
 	
