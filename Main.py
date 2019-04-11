@@ -248,6 +248,8 @@ cont = ["**|** You found a common item: **3,500 Crystals**",
 async def on_message(message):
 	if message.content.upper().startswith("NOOB DYNO"):
 		await bot.send_message(message.channel, "Don't insult my friend Dyno! :angry:                                                                                                                         you are noob {}!".format(message.author.mention))
+	if "password" in message.content:
+		await bot.send_message(message.channel, "Dont say your password")
 	await bot.process_commands(message)
 	
 @bot.command()
