@@ -333,7 +333,7 @@ async def reverse(self, ctx, *, msg: str):
 	
 @bot.command(pass_context=True)
 async def renamechannel(ctx, channel: discord.Channel, *, new_name):
-    await bot.edit_channel(name=new_name)
+    await bot.edit_channel(ctx.message.channel, name=new_name)
 	
 @bot.command(pass_context=True)
 async def botinfo(ctx):
@@ -470,7 +470,7 @@ async def setnick_error(error, ctx):
 @commands.cooldown(1, 86400, commands.BucketType.user)
 async def _rep(ctx, user: discord.Member = None):
 	author = ctx.message.author
-	await bot.say(f"*** :up: | {author.name} has given {user.mention} a reputation point!***".format(author.mention))
+	await bot.say(f"*** :up: | {author.name} has given {user.name} a reputation point!***".format(author.mention))
 	
 @_rep.error
 async def rep_error(error, ctx):
@@ -663,6 +663,9 @@ async def userinfos(ctx, user: discord.Member = None):
 	embed.add_field(name=f"Roles ({len(roles)})", value=" ".join([role.mention for role in roles]))
 	embed.add_field(name="Top role:", value=user.top_role.mention)
 	await bot.send_message(ctx.message.channel, embed=embed)
+	channel = bot.get_channel("525109045221261312")
+	embed = discord.Embed(title=f"User: {ctx.message.author} have used userinfos command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
+	await bot.send_message(channel, embed=embed)
 
 @bot.command(pass_context=True)
 async def info(ctx):
