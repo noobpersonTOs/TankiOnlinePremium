@@ -333,7 +333,7 @@ async def reverse(self, ctx, *, msg: str):
 	
 @bot.command(pass_context=True)
 async def renamechannel(ctx, channel: discord.Channel, *, new_name):
-    await bot.edit_channel(ctx.message.channel, name=new_name)
+    await bot.edit_channel(channel, name=new_name)
 	
 @bot.command(pass_context=True)
 async def botinfo(ctx):
