@@ -1062,7 +1062,6 @@ async def broadcast(ctx, *, msg):
                 break
 
 @bot.command(name="addrole", pass_context=True)
-@commands.has_permissions(administrator=True, manage_roles=True)
 async def _addrole(ctx, user: discord.Member = None, *, name = None):
     author = ctx.message.author
     role = discord.utils.get(ctx.message.server.roles, name=name)
