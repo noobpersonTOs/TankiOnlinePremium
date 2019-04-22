@@ -242,7 +242,7 @@ cont = ["**|** You found a common item: **3,500 Crystals**",
 	"**|** You found an exotic item: **Twins <:XT:560981632660537358>**",
 	"**|** You found an exotic item: **Freeze <:XT:560981632660537358>**",
 	"**|** You found an exotic item: **Striker <:XT:560981632660537358>**",
-	"**|** You found an exotic item: **Mammonth <:XT:560981632660537358>**"]
+	"**|** You found an exotic item: **Mammoth <:XT:560981632660537358>**"]
 
 @bot.event
 async def on_message(message):
