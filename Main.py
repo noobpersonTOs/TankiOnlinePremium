@@ -20,6 +20,7 @@ async def on_ready():
 	print('Logged in as')
 	print(bot.user.name)
 	print(bot.user.id)
+	print("Bot running")
 
 cont = ["**|** You found a common item: **3,500 Crystals**",
         "**|** You found a common item: **125 Double Armor**",
