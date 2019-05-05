@@ -334,6 +334,26 @@ async def reverse(self, ctx, *, msg: str):
 @bot.command(pass_context=True)
 async def renamechannel(ctx, channel: discord.Channel, *, new_name):
     await bot.edit_channel(channel, name=new_name)
+
+@bot.command(pass_context=True)
+async def member(ctx, member : discord.Member = None):
+	async with ctx.typing():
+		member = member or ctx.author
+		icon_url = member.avatar_url_as(static_format='png')
+		e = discord.Embed(type='rich', color=member.color)
+		e.set_thumbnail(url=icon_url)
+		e.add_field(name='Name', value=str(member))
+		e.add_field(name='ID', value=member.id)
+		e.add_field(name='Nickname', value=member.nick)
+		e.add_field(name='Bot Created' if member.bot else 'User Joined Discord', value=member.created_at.strftime(datetime_format))
+		e.add_field(name='Joined Guild', value=member.joined_at.strftime(datetime_format))
+		e.add_field(name='Color', value=str(member.color).upper())
+		e.add_field(name='Status and Game', value='%s, playing %s' % (str(member.status).title(), member.game), inline=False)
+		roles = sorted(member.roles)[1:] # Remove @everyone
+		roles.reverse()
+		e.add_field(name='Roles', value=', '.join(role.name for role in roles) or 'None', inline=False)
+		e.add_field(name='Icon URL', value=icon_url, inline=False)
+		await bot.say(embed=e) 
 	
 @bot.command(pass_context=True)
 async def botinfo(ctx):
