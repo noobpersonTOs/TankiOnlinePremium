@@ -791,9 +791,9 @@ async def kick_error(error, ctx):
 		text = "Sorry {}, You don't have requirement permission to use this command `kick_members`.".format(ctx.message.author.mention)
 		await bot.send_message(ctx.message.channel, text)
 		
-@bot.command(name="kicks", pass_context=True)
+@bot.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
-async def _kick(ctx, user: discord.Member = None, *, arg = None):
+async def kicks(ctx, user: discord.Member = None, *, arg = None):
 	if user is None:
 		await bot.say('Usage: `{}kick [member] [reason]`'.format(ctx.prefix))
 		return False
@@ -804,7 +804,7 @@ async def _kick(ctx, user: discord.Member = None, *, arg = None):
 		return False
 	reason = arg
 	author = ctx.message.author
-	await bot.kick(user, reason)
+	await bot.kick(user, arg)
 	embed = discord.Embed(title="Kick", description=" ", color=0x00ff00)
 	embed.add_field(name="User: ", value="<@{}>".format(user.id), inline=False)
 	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
