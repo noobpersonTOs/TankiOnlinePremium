@@ -336,8 +336,8 @@ async def renamechannel(ctx, channel: discord.Channel, *, new_name):
     await bot.edit_channel(channel, name=new_name)
 
 @bot.command(pass_context=True)
-async def member(ctx, member : discord.Member = None):
-	member = member or ctx.author
+async def members(ctx, member : discord.Member = None):
+	member = member or ctx.message.author
 	icon_url = member.avatar_url_as(static_format='png')
 	e = discord.Embed(type='rich', color=member.color)
 	e.set_thumbnail(url=icon_url)
@@ -348,7 +348,7 @@ async def member(ctx, member : discord.Member = None):
 	e.add_field(name='Joined Guild', value=member.joined_at.strftime(datetime_format))
 	e.add_field(name='Color', value=str(member.color).upper())
 	e.add_field(name='Status and Game', value='%s, playing %s' % (str(member.status).title(), member.game), inline=False)
-	roles = sorted(member.roles)[1:] # Remove @everyone
+	roles = sorted(member.roles)[1:]
 	roles.reverse()
 	e.add_field(name='Roles', value=', '.join(role.name for role in roles) or 'None', inline=False)
 	e.add_field(name='Icon URL', value=icon_url, inline=False)
@@ -790,6 +790,26 @@ async def kick_error(error, ctx):
 	if isinstance(error, discord.ext.commands.errors.CheckFailure):
 		text = "Sorry {}, You don't have requirement permission to use this command `kick_members`.".format(ctx.message.author.mention)
 		await bot.send_message(ctx.message.channel, text)
+		
+@bot.command(name="kicks", pass_context=True)
+@commands.has_permissions(kick_members=True)
+async def _kick(ctx, user: discord.Member = None, *, arg = None):
+	if user is None:
+		await bot.say('Usage: `{}kick [member] [reason]`'.format(ctx.prefix))
+		return False
+	if arg is None:
+		await bot.say("please provide a reason to {}".format(user.name))
+		return False
+	if user.server_permissions.kick_members:
+		return False
+	reason = arg
+	author = ctx.message.author
+	await bot.kick(user, reason)
+	embed = discord.Embed(title="Kick", description=" ", color=0x00ff00)
+	embed.add_field(name="User: ", value="<@{}>".format(user.id), inline=False)
+	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
+	embed.add_field(name="Reason: ", value="{}\n".format(arg), inline=False)
+	await bot.say(embed=embed)
   
 @bot.command(name="ban", pass_context=True)
 @commands.has_permissions(ban_members=True)
