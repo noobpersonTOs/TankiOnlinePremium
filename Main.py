@@ -17,6 +17,7 @@ now = datetime.datetime.now()
                  
 @bot.event
 async def on_ready():
+	await bot.change_presence(game=discord.Game(name="d!help | by noobperson"))
 	print('Logged in as')
 	print(bot.user.name)
 	print(bot.user.id)
