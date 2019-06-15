@@ -805,7 +805,7 @@ async def kicks(ctx, user: discord.Member = None, *, arg = None):
 		return False
 	reason = arg
 	author = ctx.message.author
-	await bot.kick(user, reason)
+	await user.kick(reason=reason)
 	embed = discord.Embed(title="Kick", description=" ", color=0x00ff00)
 	embed.add_field(name="User: ", value="<@{}>".format(user.id), inline=False)
 	embed.add_field(name="Moderator: ", value="{}".format(author.mention), inline=False)
