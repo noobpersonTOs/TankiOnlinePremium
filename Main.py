@@ -385,8 +385,8 @@ async def stats():
 @bot.command()
 async def invite():
 	embed = discord.Embed(description=" ", color=0xFFFF)
-	embed.add_field(name="Bot invite", value=f"[Link](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=469854214&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D409253229491126285%26permissions%3D2146958839%26scope%3Dbot&scope=bot)")
-	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/bweznkF)")
+	embed.add_field(name="Bot invite", value=f"[Link](https://discordapp.com/api/oauth2/authorize?client_id=595807503292432385&permissions=469886982&scope=bot)")
+	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/cj2eSAs)")
 	await bot.say(embed=embed)
 			
 @bot.command(pass_context=True)
