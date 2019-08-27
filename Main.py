@@ -259,7 +259,7 @@ async def square(number):
 @bot.command(name="open_container", pass_context=True, aliases="c open")
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def _open_container(ctx):
-	embed = discord.Embed(title="Tanki Online", url="https://discord.gg/bweznkF", description=" ", color=0x42d9f4)
+	embed = discord.Embed(title="Tanki Online", url="https://discord.gg/cj2eSAs", description=" ", color=0x42d9f4)
 	embed.set_thumbnail(url="https://imgur.com/yf0oeDe.png")
 	embed.add_field(name="Container", value=random.choice(cont))
 	await bot.say(embed=embed)
