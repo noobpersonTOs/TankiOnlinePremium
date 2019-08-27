@@ -448,7 +448,7 @@ async def ratings(ctx, user: str):
 				embed = discord.Embed(title=f"User: {ctx.message.author} have used ratings command", description=f"ID: {ctx.message.author.id}", color=0xff9393)
 				await bot.send_message(channel, embed=embed)
 			except:
-				await bot.say("Account does not exist.")
+				await bot.send_message(channel, "Account does not exist.")
     			
 @bot.command(pass_context=True)
 async def nooobs(ctx, *, reportmsg: str):
