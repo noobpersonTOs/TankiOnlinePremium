@@ -538,7 +538,7 @@ async def setup(ctx):
     print(f"{ctx.message.author.name} from {ctx.message.server} used d!setup command")
     
 def user_is_me(ctx):
-	return ctx.message.author.id == "277983178914922497"
+	return ctx.message.author.id == "601622622957994006"
     
 @bot.command(name="multicolor", pass_context=True)
 @commands.check(user_is_me)
