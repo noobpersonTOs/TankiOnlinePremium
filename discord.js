@@ -1,53 +1,82 @@
-const Discord = require("discord.js");
-const prefix = "+";
-const fs = require("fs");
-
-const bot = new Discord.Client({disableEveryone: true});
-
-bot.on("ready", async () => {
+const http = require('http');
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(new Date() + " Ping Received");
+  response.sendStatus(400);
+});
+app.listen(3000);
+setInterval(() => {
+  http.get(`http://discord-js-botz.glitch.me/`);
+}, 280000);
+ 
+const setupCMD = "+setreactionrole"
+let initialMessage = `**React to the messages below to receive the associated role. If you would like to remove the role, simply remove your reaction!**`;
+const roles = ["Javascript", "Python"];
+const reactions = ["✅", "✅"];
+ 
+//Load up the bot...
+const Discord = require('discord.js');
+const bot = new Discord.Client();
+ 
+bot.once('ready', () => {
   bot.user.setGame(`i am a boring bot ever`, 'https://twitch.tv/DarkOufa');
   console.log(`${bot.user.username} is online!`);
 });
-
-bot.on("message", async message => {
-  if(message.author.bot) return;
-  if(message.channel.type === "dm") return;
-  
-  let messageArray = message.content.split(" ");
-  let command = messageArray[0];
-  let args = messageArray.slice(1);
-  
-  if(!command.startsWith(prefix)) return;
-  
-  if(command === `${prefix}ping`) {
-    message.channel.send("Pong!");
-  
-  }
-  
-  if(command === `${prefix}userinfo`) {
-    let embed = new Discord.RichEmbed()
-        .setAuthor(message.author.username)
-        .setDescription("This is the user's info")
-        .setColor("#FFFF")
-        .addField("Username:", `${message.author.username}`)
-        .addField("User ID:", message.author.id)
-        .addField("discriminator", `#${message.author.discriminator}`)
-        .addField("Created at", message.author.createdAt)
-    
-    message.channel.sendEmbed(embed);
-  
-  }
-  
-  if(command === `${prefix}say`) {
-    // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
-    // To get the "message" itself we join the `args` back into a string with spaces: 
-    const sayMessage = args.join(" ");
-    // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
-    message.delete().catch(O_o=>{}); 
-    // And we get the bot to say the thing: 
-    message.channel.send(sayMessage);
-  
-  }
-  
-  if(command === `${prefix}kick`) {
-    // This command must be limited to mods and admins. In this example we just hardcode the role names.
+ 
+//If there isn't a reaction for every role, scold the user!
+if (roles.length !== reactions.length) throw "Roles list and reactions list are not the same length!";
+ 
+//Function to generate the role messages, based on your settings
+function generateMessages(){
+    var messages = [];
+    messages.push(initialMessage);
+    for (let role of roles) messages.push(`React below to get the **"${role}"** role!`); //DONT CHANGE THIS
+    return messages;
+}
+ 
+ 
+bot.on("message", message => {
+    if (message.member.hasPermission("ADMINISTRATOR") && message.content.toLowerCase() == setupCMD){
+        var toSend = generateMessages();
+        let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
+        for (let mapObj of mappedArray){
+            message.channel.send(mapObj[0]).then( sent => {
+                if (mapObj[1]){
+                  sent.react(mapObj[1]);  
+                }
+            });
+        }
+    }
+})
+ 
+ 
+bot.on('raw', event => {
+    if (event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
+       
+        let channel = bot.channels.get(event.d.channel_id);
+        let message = channel.fetchMessage(event.d.message_id).then(msg=> {
+        let user = msg.guild.members.get(event.d.user_id);
+       
+        if (msg.author.id == bot.user.id && msg.content != initialMessage){
+       
+            var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+            var role = msg.content.match(re)[1];
+       
+            if (user.id != bot.user.id){
+                var roleObj = msg.guild.roles.find(r => r.name === role);
+                var memberObj = msg.guild.members.get(user.id);
+               
+                if (event.t === "MESSAGE_REACTION_ADD"){
+                    memberObj.addRole(roleObj);
+                } else {
+                    memberObj.removeRole(roleObj);
+                }
+            }
+        }
+        })
+ 
+    }  
+});
+ 
+bot.login(process.env.TOKEN);
