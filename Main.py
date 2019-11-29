@@ -358,8 +358,8 @@ async def members(ctx, member : discord.Member = None):
 @bot.command(pass_context=True)
 async def botinfo(ctx):
 	embed=discord.Embed(title="Bot name", description="Tanki Online", color=0xFFFF00)
-	embed.add_field(name="Creator", value="noobperson#2436")
-	embed.add_field(name="Invite link", value="[Click Here!](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=2146958839&scope=bot)")
+	embed.add_field(name="Creator", value="Dark Oufa#2193")
+	embed.add_field(name="Invite link", value="[Click Here!](https://discordapp.com/oauth2/authorize?client_id=595807503292432385&permissions=469855238&scope=bot)")
 	embed.add_field(name="Prefix", value="d!")
 	await bot.say(embed=embed)
 	
@@ -385,7 +385,7 @@ async def stats():
 @bot.command()
 async def invite():
 	embed = discord.Embed(description=" ", color=0xFFFF)
-	embed.add_field(name="Bot invite", value=f"[Link](https://discordapp.com/api/oauth2/authorize?client_id=595807503292432385&permissions=469886982&scope=bot)")
+	embed.add_field(name="Bot invite", value=f"[Link](https://discordapp.com/oauth2/authorize?client_id=595807503292432385&permissions=469855238&scope=bot)")
 	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/cj2eSAs)")
 	await bot.say(embed=embed)
 			
@@ -695,7 +695,7 @@ async def info(ctx):
 	embed.add_field(name="Servers:", value=f"{str(len(servers))}")
 	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
 	embed.add_field(name="Owner", value="noobperson#2436")
-	embed.add_field(name="Invite", value=f"[Link](https://discordapp.com/api/oauth2/authorize?client_id=409253229491126285&permissions=2146958839&scope=bot)")
+	embed.add_field(name="Invite", value=f"[Link](https://discordapp.com/oauth2/authorize?client_id=595807503292432385&permissions=469855238&scope=bot)")
 	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/bweznkF)")
 	embed.add_field(name="Donate", value=f"[Link](https://www.paypal.me/noobpersonTO2)")
 	embed.add_field(name="Upvote me (invalid)", value=f"[Link](https://discordbots.org/bot/409253229491126285/vote)")
@@ -1010,7 +1010,6 @@ async def _setgame(ctx, *args):
 	await bot.change_presence(game=discord.Game(name=setgame))
 	await bot.delete_message(ctx.message)
 	await bot.say(":ballot_box_with_check: Game set to: `" + setgame + "`")
-	print("Game set to: `" + setgame + "`")
 	
 @_setgame.error
 async def setgame_error(error, ctx):
