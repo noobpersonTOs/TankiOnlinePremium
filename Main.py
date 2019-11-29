@@ -694,7 +694,7 @@ async def info(ctx):
 	embed = discord.Embed(title="Tanki Online", color=0xFFFF)
 	embed.add_field(name="Servers:", value=f"{str(len(servers))}")
 	embed.add_field(name="Users:", value=f"{str(len(set(bot.get_all_members())))}")
-	embed.add_field(name="Owner", value="noobperson#2436")
+	embed.add_field(name="Owner", value="Dark Oufa#2193")
 	embed.add_field(name="Invite", value=f"[Link](https://discordapp.com/oauth2/authorize?client_id=595807503292432385&permissions=469855238&scope=bot)")
 	embed.add_field(name="Support server", value=f"[Link](https://discord.gg/bweznkF)")
 	embed.add_field(name="Donate", value=f"[Link](https://www.paypal.me/noobpersonTO2)")
