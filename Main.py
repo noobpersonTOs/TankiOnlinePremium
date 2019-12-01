@@ -847,8 +847,6 @@ async def _warn(ctx, user: discord.Member = None, *, arg = None):
 	if arg is None:
 		await bot.say("please provide a reason to {}".format(user.name))
 		return False
-	if user.server_permissions.kick_members:
-		return False
 	reason = arg
 	author = ctx.message.author
 	server = ctx.message.server
