@@ -275,7 +275,7 @@ async def open_container_error(error, ctx):
 @bot.command(pass_context=True)
 async def invites(ctx):
     """Create instant invite"""
-    link = await bot.channel.create_invite(max_age = 1)
+    link = await bot.channel.create_invite(destination = ctx.message.channel, max_age = 1)
     await bot.say("Here is an instant invite to your server: " + link)
 	
 @bot.command(pass_context=True, no_pm=True)
