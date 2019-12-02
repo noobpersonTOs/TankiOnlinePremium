@@ -271,12 +271,12 @@ async def open_container_error(error, ctx):
 		msgs = await bot.send_message(ctx.message.channel, msg)
 		await asyncio.sleep(5)
 		await bot.delete_message(msgs)
-		
-@bot.command(pass_context = True)
-async def invites(ctx, userToInvite):
-	inviteLinq = await bot.create_invite(destination = ctx.message.server, max_uses = 1)
-	target_user = await bot.get_user_info(userToInvite)
-	await bot.send_message(target_user, inviteLinq)
+
+@bot.command(pass_context=True)
+async def invites(ctx):
+    """Create instant invite"""
+    link = await bot.channel.create_invite(max_age = 1)
+    await bot.say("Here is an instant invite to your server: " + link)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
