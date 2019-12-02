@@ -276,7 +276,7 @@ async def open_container_error(error, ctx):
 async def invites(ctx, userToInvite):
         inviteLinq = await bot.create_invite(destination = ctx.message.channel, max_uses = 1)
         target_user = await bot.get_user_info(userToInvite)
-        await bot.send_message(target_member, inviteLinq)
+        await bot.send_message(target_user, inviteLinq)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
