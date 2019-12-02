@@ -273,9 +273,10 @@ async def open_container_error(error, ctx):
 		await bot.delete_message(msgs)
 		
 @bot.command(pass_context = True)
-async def invites(ctx):
-        inviteLinq = await bot.create_invite(destination = ctx.message.channel, max_uses = 1)
-        await bot.send_message(inviteLinq)
+async def invites(ctx, userToInvite):
+        inviteLinq = await bot.create_invite(destination = ctx.message.server, max_uses = 1)
+	target_user = await BSL.get_user_info(userToInvite)
+        await BSL.send_message(target_member, inviteLinq)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
