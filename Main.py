@@ -275,8 +275,8 @@ async def open_container_error(error, ctx):
 @bot.command(pass_context = True)
 async def invites(ctx, userToInvite):
         inviteLinq = await bot.create_invite(destination = ctx.message.server, max_uses = 1)
-	target_user = await BSL.get_user_info(userToInvite)
-        await BSL.send_message(target_member, inviteLinq)
+	target_user = await bot.get_user_info(userToInvite)
+        await bot.send_message(target_member, inviteLinq)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
