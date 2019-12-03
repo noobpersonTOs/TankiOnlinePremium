@@ -273,7 +273,7 @@ async def open_container_error(error, ctx):
 		await bot.delete_message(msgs)
 
 @bot.command(pass_context=True)
-async def announcement(ctx, int: channel, text):
+async def announcement(ctx, text):
 	channel = ctx.message.channel
 	await bot.say(channel, text)
 	
