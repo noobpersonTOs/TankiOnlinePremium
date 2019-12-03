@@ -274,7 +274,8 @@ async def open_container_error(error, ctx):
 
 @bot.command(pass_context=True)
 async def announcement(ctx, int: channel, text):
-	await bot.say(ctx.message.channel, text)
+	channel = ctx.message.channel
+	await bot.say(channel, text)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
