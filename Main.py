@@ -273,8 +273,8 @@ async def open_container_error(error, ctx):
 		await bot.delete_message(msgs)
 
 @bot.command(pass_context=True)
-async def announce(ctx, channel: discord.Channel, *, message: str):
-	channel = ctx.message.channel
+async def announce(ctx, channel: discord.Channel, *args, message: str):
+	channel = bot.get_channel(*args)
 	await bot.send_message(channel, message)
 	
 @bot.command(pass_context=True)
@@ -616,6 +616,7 @@ async def addrank(ctx, *, name = None):
 	role = discord.utils.get(ctx.message.server.roles, name=name)
 	await bot.create_role(server, name=name)
 	text = await bot.say("{} created a role {}".format(author.mention, role.name))
+	await bot.say(text)
 	
 @bot.command(pass_context=True)
 @commands.check(user_is_me)
