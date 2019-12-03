@@ -273,10 +273,13 @@ async def open_container_error(error, ctx):
 		await bot.delete_message(msgs)
 
 @bot.command(pass_context=True)
-async def announce(ctx, channel: discord.Channel, message: str):
-	channel = bot.get_channel(id)
+async def announce(ctx, channel: discord.Channel, *, message: str):
+	channel = bot.get_channel(channel)
+	await bot.send_message(channel, message)
 	
-	await bot.say(channel, message)
+@bot.command(pass_context=True)
+async def renamechannel(ctx, channel: discord.Channel, *, new_name):
+	await bot.edit_channel(channel, name=new_name)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
@@ -337,10 +340,6 @@ async def autobaselink(ctx):
 async def reverse(self, ctx, *, msg: str):
 	"""ffuts esreveR"""
 	await bot.say(msg[::-1])
-	
-@bot.command(pass_context=True)
-async def renamechannel(ctx, channel: discord.Channel, *, new_name):
-    await bot.edit_channel(channel, name=new_name)
 
 @bot.command(pass_context=True)
 async def members(ctx, member : discord.Member = None):
