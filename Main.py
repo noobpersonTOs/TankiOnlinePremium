@@ -273,9 +273,25 @@ async def open_container_error(error, ctx):
 		await bot.delete_message(msgs)
 
 @bot.command(pass_context=True)
-async def announcement(ctx, text):
+async def announce(ctx, text):
 	channel = ctx.message.channel
 	await bot.say(channel, text)
+	
+@bot.command(brief='announce [message]', pass_context=True)
+async def announces(ctx, message : str):
+	print(str(message))
+	if(str(ctx.message.author) == user):
+		await bot.say('User Authentication Successful')
+		try:
+			for chan in channels:
+				try:
+					channel = bot.get_channel(chan)
+					info = discord.Embed(title='New Announcement!', description=str(message), color=0xFFFFFF)
+					await bot.send_channel(embed=info)
+					except Exception as e:
+						await bot.say("Error: " + str(chan))
+						except Exception as e:
+							await bot.say(e)
 	
 @bot.command(pass_context=True, no_pm=True)
 async def infos(ctx):
