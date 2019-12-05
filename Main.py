@@ -273,7 +273,7 @@ async def open_container_error(error, ctx):
 		await bot.delete_message(msgs)
 
 @bot.command(pass_context=True)
-async def announce(ctx, channel: discord.Channel, message: str):
+async def announce(ctx, channel: discord.Channel, *, message: str):
 	await bot.send_message(channel, message)
 	
 @bot.command(pass_context=True)
