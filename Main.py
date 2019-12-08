@@ -11,13 +11,13 @@ import os
 
 start_time = time.time()
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or(">"))
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("d!"))
 bot.remove_command('help')
 now = datetime.datetime.now()
                  
 @bot.event
 async def on_ready():
-	await bot.change_presence(game=discord.Game(name=">help | by Dark Oufa"))
+	await bot.change_presence(game=discord.Game(name="d!help | by Dark Oufa"))
 	print('Logged in as')
 	print(bot.user.name)
 	print(bot.user.id)
