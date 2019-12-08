@@ -11,7 +11,7 @@ import os
 
 start_time = time.time()
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("d!"))
+bot = commands.Bot(command_prefix=commands.when_mentioned_or(">"))
 bot.remove_command('help')
 now = datetime.datetime.now()
                  
