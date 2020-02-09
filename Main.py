@@ -939,11 +939,11 @@ async def help1(ctx):
 async def help(ctx):
     author = ctx.message.author
     embed = discord.Embed(description=" ")
-    embed.add_field(name="Help is Here!", value="***Example:*** `d!ratings noobperson`", inline=True)
-    embed.add_field(name="General:", value="`info,`  `help,`  `invite`", inline=True)
-    embed.add_field(name="Moderations:", value="`mute,`  `unmute,`  `kick,`  `ban,`  `unban`", inline=True)
-    embed.add_field(name="Economy:", value="`coinflip`  `c open`", inline=True)
-    embed.add_field(name="Other:", value="`ping,`  `stats,`  `say,`  `serverinfo,`  `membercount,`  `userinfo,` `botinfo`", inline=True)
+    embed.add_field(name="Help is Here!", value="***Example:*** `d!ratings noobperson`", inline=False)
+    embed.add_field(name="General:", value="`info,`  `help,`  `invite`", inline=False)
+    embed.add_field(name="Moderations:", value="`mute,`  `unmute,`  `kick,`  `ban,`  `unban`", inline=False)
+    embed.add_field(name="Economy:", value="`coinflip`  `c open`", inline=False)
+    embed.add_field(name="Other:", value="`ping,`  `stats,`  `say,`  `serverinfo,`  `membercount,`  `userinfo,` `botinfo`", inline=False)
     embed.set_footer(text="Requested by: " + author.name)
     await bot.say(embed=embed)
 	
